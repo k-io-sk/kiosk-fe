@@ -40,3 +40,16 @@
   width: 1.2rem;
   display: block;
 }
+
+.transparentForm {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.whiteInput {
+  color: white; /* 입력한 글자 흰색 */
+}
+
+.whiteInput::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}

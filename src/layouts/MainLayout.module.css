@@ -3,7 +3,6 @@
   position: relative;
   min-height: 100vh;
   min-width: 100vw;
-  padding-top: 60px;
 }
 
 /* Header와 Footer는 배경 위에 오도록 z-index 설정 */
