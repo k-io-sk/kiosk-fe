@@ -1,0 +1,42 @@
+.form {
+  position: relative;
+  display: inline-block;
+  background-color: #f6f6f6;
+  border-radius: 26px;
+  width: clamp(12rem, 40vw, 28rem);
+  height: 2.3rem;
+}
+
+.input {
+  padding: 0 1.5rem;
+  line-height: 2.3rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.searchIconicon {
+  width: 1.2rem;
+  display: block;
+}
