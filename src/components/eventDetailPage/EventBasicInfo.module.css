@@ -1,0 +1,101 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10rem, 4vw, 8rem);
+  margin: 8rem;
+}
+
+.posterCard {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 33rem;
+}
+
+.posterCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.info {
+  display: grid;
+  gap: 1.2rem;
+  width: 100%;
+  width: 33rem;
+  justify-items: stretch;
+  text-align: left;
+}
+
+.title {
+  font-size: clamp(3rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 0.2rem 0 0.5rem;
+  text-align: center;
+  color: #000000;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  row-gap: 0.6rem;
+}
+.meta > div {
+  display: contents;
+}
+/* 라벨(장소/기간/모집대상 등) 볼드체 */
+.meta dt {
+  color: #06394a;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.meta dd {
+  margin: 0;
+  color: #06394a;
+}
+
+.actions {
+  display: flex;
+  gap: 3rem;
+  margin-top: 0.4rem;
+  justify-content: center;
+}
+
+.btn {
+  width: 8rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.1rem;
+  border-radius: 3px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #333333;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: #333333;
+}
+.btn:focus,
+.btn:active {
+  outline: none;
+  box-shadow: none;
+  border-color: #333333;
+}
