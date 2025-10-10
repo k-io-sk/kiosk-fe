@@ -1,0 +1,31 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 55rem;
+  margin: 4rem auto;
+  line-height: 1.7;
+  text-align: left;
+  color: #000000;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.meta {
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.meta p {
+  margin: 0.3rem 0;
+}
+
+.desc {
+  white-space: pre-line; /* 줄바꿈 유지 */
+  font-size: 1rem;
+}
