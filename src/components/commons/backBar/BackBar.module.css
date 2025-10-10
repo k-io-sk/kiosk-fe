@@ -1,0 +1,45 @@
+.backBar {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  width: 100%;
+  height: var(--backbar-h);
+  background-color: #353e5c;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  z-index: 90;
+  overflow: visible;
+}
+
+.iconButton {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  outline: none;
+}
+
+.iconButton:focus,
+.iconButton:active,
+.iconButton:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.icon {
+  color: #fff;
+  font-size: 1.8rem;
+}

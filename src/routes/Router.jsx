@@ -8,10 +8,10 @@ export default function Routers() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />{' '}
-          <Route path="/events" element={<EventListPage />} />
-          <Route path="/events/:id" element={<EventDetailPage />} />
+        <Route path='/' element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path='/events' element={<EventListPage />} />
+          <Route path='/events/:id' element={<EventDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import styles from './IntroSection.module.css';
-import SectionWrapper from '../commons/SectionWrapper';
+import SectionWrapper from '../../commons/sectionWrapper/SectionWrapper';
 import introImg from '@assets/images/intro.png';
 
 export default function IntoSection() {
