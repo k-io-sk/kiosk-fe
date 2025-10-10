@@ -6,13 +6,28 @@
   justify-content: space-between;
   padding: 1rem 3rem;
   width: 100%;
+  height: var(--header-h);
   z-index: 100;
   box-sizing: border-box;
-  color: #06394A;
+  color: #06394a;
+}
+
+/* 홈 페이지에서는 배경 위에 겹쳐지도록 */
+.homeHeader {
+  position: absolute;
+  background: transparent;
+  color: white;
+}
+
+/* 나머지 페이지에서는 화면 상단에 고정 */
+.fixedHeader {
+  position: fixed;
+  color: #353e5c;
+  background-color: #ffffff;
 }
 
 .whiteLogo .logo {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .logo {
