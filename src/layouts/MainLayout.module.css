@@ -1,17 +1,36 @@
-/* 기본 레이아웃 */
+:root {
+  --header-h: 72px;
+  --backbar-h: 64px;
+}
+
 .layout {
   position: relative;
   min-height: 100vh;
   min-width: 100vw;
 }
 
-/* Header와 Footer는 배경 위에 오도록 z-index 설정 */
 header,
 footer {
   position: relative;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-/* Outlet에 해당하는 페이지 콘텐츠는 기본적으로 배경 위에 오도록 */
-main {
+.content {
   position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+.isHome .content {
+  padding-top: 0;
+}
+
+.isSub .content {
+  padding-top: calc(var(--header-h) + var(--backbar-h));
+}
+
