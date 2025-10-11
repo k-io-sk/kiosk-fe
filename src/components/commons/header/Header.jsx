@@ -4,12 +4,17 @@ import HeaderSearch from './HeaderSearch';
 
 export default function Header() {
   const location = useLocation();
-  const isIntroPage = location.pathname === '/';
+  const isHomePage = location.pathname === '/';
+
   return (
-    <header className={`${styles.section} ${isIntroPage ? styles.whiteLogo : ''}`}>
-      {' '}
+    <header
+      className={`${styles.section} ${
+        isHomePage ? styles.homeHeader : styles.fixedHeader
+      } ${isHomePage ? styles.whiteLogo : ''}`}
+    >
       <h1 className={styles.logo}>LOGO</h1>
       <HeaderSearch />
     </header>
   );
 }
+ 
