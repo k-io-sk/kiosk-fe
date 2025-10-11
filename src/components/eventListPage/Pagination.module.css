@@ -1,0 +1,42 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 40px 0 80px;
+}
+
+.pageNumber,
+.pageArrow {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+  color: #555;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+.pageNumber.active {
+  background-color: #555;
+  color: #fff;
+}
+
+.pageArrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+  background-color: transparent;
+}

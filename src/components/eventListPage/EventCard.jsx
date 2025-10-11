@@ -1,14 +1,16 @@
 import styles from './EventCard.module.css';
 
 export default function EventCard({ event }) {
+  const { thumbnail, title, startDate, endDate, place } = event;
+
   return (
     <div className={styles.card}>
-      <img src={event.thumbnail} alt={event.title} />
-      <p className={styles.title}>{event.title}</p>
+      <img src={thumbnail || ''} alt={title} className={styles.img} />
+      <p className={styles.title}>{title}</p>
       <p className={styles.date}>
-        {event.startDate} ~ {event.endDate}
+        {startDate} ~ {endDate}
       </p>
-      <p className={styles.place}>{event.place}</p>
+      <p className={styles.place}>{place}</p>
     </div>
   );
 }
