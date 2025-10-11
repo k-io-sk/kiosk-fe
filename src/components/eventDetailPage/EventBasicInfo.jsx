@@ -1,7 +1,7 @@
 // 전시 기본 정보
-import SectionWrapper from '../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventBasicInfo.module.css';
-import artweekPoster from '@assets/images/artweek.png'; 
+import artweekPoster from '@assets/images/artweek.png';
 
 export default function EventBasicInfo({
   posterSrc = artweekPoster,

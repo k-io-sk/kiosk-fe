@@ -1,7 +1,7 @@
 import styles from '../exhibition/ExhibitionSection.module.css';
 import festivalImg from '@assets/images/festival.png';
 import img from '@assets/images/img.png';
-import SectionWrapper from '../../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 
 export default function FestivalSection() {
   return (

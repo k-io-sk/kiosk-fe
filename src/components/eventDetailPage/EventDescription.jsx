@@ -1,5 +1,5 @@
 // 상세 소개
-import SectionWrapper from '../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventDescription.module.css';
 
 export default function EventDescription() {

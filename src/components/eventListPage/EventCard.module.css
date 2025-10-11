@@ -1,0 +1,28 @@
+.card {
+  text-align: left;
+  width: 225px;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+.img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  background-color: #ccc;
+  display: block;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 14px 0;
+  color: #111;
+}
+
+.date,
+.place {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0;
+}

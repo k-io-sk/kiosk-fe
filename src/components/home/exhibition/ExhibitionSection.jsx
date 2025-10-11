@@ -1,5 +1,5 @@
 import styles from './ExhibitionSection.module.css';
-import SectionWrapper from '../../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 import exhibitionImg from '@assets/images/exhibition.png';
 import e1 from '@assets/images/exhibition_1.png';
 import e2 from '@assets/images/exhibition_2.png';
