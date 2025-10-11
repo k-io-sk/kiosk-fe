@@ -1,25 +1,25 @@
 import styles from './PerformanceSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 import performanceImg from '@assets/images/performance.png';
-import img from '@assets/images/img.png';
 
-export default function PerformanceSection() {
+export default function PerformanceSection({ items = [] }) {
+  const list = items.slice(0, 3);
+  const showFallback = list.length === 0;
+
   return (
     <SectionWrapper>
       <div className={styles.backgroundImage} style={{ backgroundImage: `url(${performanceImg})` }}>
         <div className={styles.overlay} />
         <div className={styles.content}>
-          <div className={styles.gallery}>
-            <div className={styles.card}>
-              <img src={img} alt='festival 1' />
+          {list.length > 0 && (
+            <div className={styles.gallery}>
+              {list.map((ev) => (
+                <div className={styles.card} key={ev.eventId}>
+                  <img src={ev.mainImage} alt={`show ${ev.eventId}`} loading='lazy' />
+                </div>
+              ))}
             </div>
-            <div className={styles.card}>
-              <img src={img} alt='festival 2' />
-            </div>
-            <div className={styles.card}>
-              <img src={img} alt='festival 3' />
-            </div>
-          </div>
+          )}
 
           <div className={styles.description}>
             <div className={styles.vline} />

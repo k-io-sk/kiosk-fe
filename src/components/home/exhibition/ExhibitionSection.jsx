@@ -1,11 +1,11 @@
 import styles from './ExhibitionSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 import exhibitionImg from '@assets/images/exhibition.png';
-import e1 from '@assets/images/exhibition_1.png';
-import e2 from '@assets/images/exhibition_2.png';
-import e3 from '@assets/images/exhibition_3.png';
 
-export default function ExhibitionSection() {
+export default function ExhibitionSection({ items = [] }) {
+  const list = items.slice(0, 3);
+  const showFallback = list.length === 0;
+
   return (
     <SectionWrapper>
       <div className={styles.backgroundImage} style={{ backgroundImage: `url(${exhibitionImg})` }}>
@@ -26,17 +26,15 @@ export default function ExhibitionSection() {
             </div>
           </div>
 
-          <div className={styles.gallery}>
-            <div className={styles.card}>
-              <img src={e1} alt='exhibition 1' />
+          {list.length > 0 && (
+            <div className={styles.gallery}>
+              {list.map((event) => (
+                <div className={styles.card} key={event.eventId}>
+                  <img src={event.mainImage} alt={`${event.eventCategory} ${event.eventId}`} loading='lazy' />
+                </div>
+              ))}
             </div>
-            <div className={styles.card}>
-              <img src={e2} alt='exhibition 2' />
-            </div>
-            <div className={styles.card}>
-              <img src={e3} alt='exhibition 3' />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </SectionWrapper>
