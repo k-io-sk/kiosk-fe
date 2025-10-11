@@ -1,5 +1,5 @@
 import styles from './PerformanceSection.module.css';
-import SectionWrapper from '../../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 import performanceImg from '@assets/images/performance.png';
 import img from '@assets/images/img.png';
 

@@ -1,5 +1,5 @@
 // 홍보 영상
-import SectionWrapper from '../commons/sectionWrapper/SectionWrapper';
+import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventVideo.module.css';
 
 export default function EventVideo() {
