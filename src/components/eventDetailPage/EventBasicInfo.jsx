@@ -3,63 +3,51 @@ import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventBasicInfo.module.css';
 import artweekPoster from '@assets/images/artweek.png';
 
-export default function EventBasicInfo({
-  posterSrc = artweekPoster,
-  title = '2025 인사아트위크',
-  location = '인사동 일대 참여',
-  period = '2025-06-04 ~ 2025-06-14',
-  target = '전체',
-  submitWindow = '-',
-  price = '-',
-  contact = '-',
-  note = '-',
-}) {
+export default function EventBasicInfo({ data }) {
+  const { mainImage, title, location, startDate, endDate, eventTime, recruitTarget, price, inquiry, eventCategory } =
+    data || {};
+
+  const safe = (v) => (v && v !== '' ? v : '-');
+
   return (
     <SectionWrapper>
       <section className={styles.wrap} aria-labelledby='event-basic-title'>
         {/* 포스터 */}
         <div className={styles.posterCard}>
-          {posterSrc ? (
-            <img src={posterSrc} alt={`${title} 포스터`} />
-          ) : (
-            <div className={styles.posterPlaceholder}>포스터</div>
-          )}
+          <img src={safe(mainImage) !== '-' ? mainImage : artweekPoster} alt={`${safe(title)} 포스터`} />
         </div>
 
         {/* 기본 정보 */}
         <div className={styles.info}>
           <h2 id='event-basic-title' className={styles.title}>
-            {title}
+            {safe(title)}
           </h2>
 
           <dl className={styles.meta}>
             <div>
               <dt>장소</dt>
-              <dd>{location}</dd>
+              <dd>{safe(location)}</dd>
             </div>
             <div>
               <dt>기간</dt>
-              <dd>{period}</dd>
+              <dd>
+                {safe(startDate)} ~ {safe(endDate)} {safe(eventTime)}
+              </dd>
             </div>
             <div>
               <dt>모집대상</dt>
-              <dd>{target}</dd>
-            </div>
-            <div>
-              <dt>접수기간</dt>
-              <dd>{submitWindow}</dd>
+              <dd>{safe(recruitTarget)}</dd>
             </div>
             <div>
               <dt>기본가</dt>
-              <dd>{price}</dd>
+              <dd>{safe(price)}</dd>
             </div>
             <div>
               <dt>문의</dt>
-              <dd>{contact}</dd>
+              <dd>{safe(inquiry)}</dd>
             </div>
             <div>
               <dt>비고</dt>
-              <dd>{note}</dd>
             </div>
           </dl>
 

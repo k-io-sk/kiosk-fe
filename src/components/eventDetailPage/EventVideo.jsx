@@ -2,7 +2,8 @@
 import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventVideo.module.css';
 
-export default function EventVideo() {
+export default function EventDescription({ data }) {
+  const caption = data?.title || '-';
   const dummyVideo = {
     title: 'IAW2025',
     caption: '2025 인사아트위크 홍보영상',
@@ -17,7 +18,7 @@ export default function EventVideo() {
             <div className={styles.playButton}>▶</div>
           </div>
         </div>
-        <p className={styles.caption}>{dummyVideo.caption}</p>
+        <p className={styles.caption}>{caption}</p>
       </section>
     </SectionWrapper>
   );
