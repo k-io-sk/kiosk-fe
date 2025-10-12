@@ -1,7 +1,7 @@
 import styles from './FilterBar.module.css';
 import { useState } from 'react';
 
-export default function FilterBar() {
+export default function FilterBar({ onFilterChange }) {
   const categories = ['전체', '공연', '전시', '축제', '교육/강좌', '기타'];
   const periods = ['전체', '오늘', '이번주', '이번달'];
 
@@ -10,12 +10,12 @@ export default function FilterBar() {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    console.log('Category filter applied:', category);
+    if (onFilterChange) onFilterChange(category, selectedPeriod);
   };
 
   const handlePeriodClick = (period) => {
     setSelectedPeriod(period);
-    console.log('Period filter applied:', period);
+    if (onFilterChange) onFilterChange(selectedCategory, period);
   };
 
   return (
