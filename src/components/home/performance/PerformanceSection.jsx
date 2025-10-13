@@ -1,20 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './PerformanceSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 import performanceImg from '@assets/images/performance.png';
 
 export default function PerformanceSection({ items = [] }) {
+  const navigate = useNavigate();
   const list = items.slice(0, 3);
   const showFallback = list.length === 0;
+
+  const handleCardClick = (id) => {
+    navigate(`/events/${id}`);
+  };
 
   return (
     <SectionWrapper>
       <div className={styles.backgroundImage} style={{ backgroundImage: `url(${performanceImg})` }}>
         <div className={styles.overlay} />
         <div className={styles.content}>
-          {list.length > 0 && (
+          {!showFallback && (
             <div className={styles.gallery}>
               {list.map((ev) => (
-                <div className={styles.card} key={ev.eventId}>
+                <div className={styles.card} key={ev.eventId} onClick={() => handleCardClick(ev.eventId)}>
                   <img src={ev.mainImage} alt={`show ${ev.eventId}`} loading='lazy' />
                 </div>
               ))}
@@ -30,7 +36,7 @@ export default function PerformanceSection({ items = [] }) {
                 <br />
                 인사동 공연에서 특별한 순간을 만나보세요
               </p>
-              <button className={styles.linkBtn} type='button'>
+              <button className={styles.linkBtn} type='button' onClick={() => navigate('/events')}>
                 보러가기 →
               </button>
             </div>

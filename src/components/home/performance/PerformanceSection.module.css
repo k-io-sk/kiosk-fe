@@ -33,7 +33,7 @@
 .description {
   position: relative;
   display: flex;
-  flex-direction: row-reverse; 
+  flex-direction: row-reverse;
   align-items: stretch;
   justify-content: end;
   gap: clamp(1rem, 2vw, 2rem);
@@ -53,7 +53,7 @@
 .texts {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; 
+  align-items: flex-end;
   text-align: right;
   gap: clamp(0.4rem, 1.2vw, 1rem);
   margin-right: 1.5rem;
@@ -111,6 +111,7 @@
 }
 
 .card {
+  cursor: pointer;
   width: clamp(7.5rem, 16vw, 15rem);
   aspect-ratio: 3 / 4;
   background: rgba(255, 255, 255, 0.06);
