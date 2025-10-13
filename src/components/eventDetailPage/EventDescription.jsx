@@ -11,7 +11,7 @@ export default function EventDescription({ data }) {
   return (
     <SectionWrapper>
       <section className={styles.wrap}>
-        <h2 className={styles.title}>&lt;{title}&gt;</h2>
+        <h2 className={styles.title}>{title}</h2>
 
         <div className={styles.meta}>
           <p>
