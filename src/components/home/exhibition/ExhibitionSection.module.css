@@ -107,6 +107,7 @@
 }
 
 .card {
+  cursor: pointer;
   width: clamp(7.5rem, 16vw, 15rem);
   aspect-ratio: 3 / 4;
   background: rgba(255, 255, 255, 0.06);

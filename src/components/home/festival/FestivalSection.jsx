@@ -1,10 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import styles from '../exhibition/ExhibitionSection.module.css';
 import festivalImg from '@assets/images/festival.png';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 
 export default function FestivalSection({ items = [] }) {
+  const navigate = useNavigate();
   const list = items.slice(0, 3);
   const showFallback = list.length === 0;
+
+  const handleCardClick = (id) => {
+    navigate(`/events/${id}`);
+  };
 
   return (
     <SectionWrapper>
@@ -20,16 +26,16 @@ export default function FestivalSection({ items = [] }) {
                 <br />
                 인사동 축제에서 특별한 하루를 즐기세요
               </p>
-              <button className={styles.linkBtn} type='button'>
+              <button className={styles.linkBtn} type='button' onClick={() => navigate('/events')}>
                 보러가기 →
               </button>
             </div>
           </div>
 
-          {list.length > 0 && (
+          {!showFallback && (
             <div className={styles.gallery}>
               {list.map((ev) => (
-                <div className={styles.card} key={ev.eventId}>
+                <div className={styles.card} key={ev.eventId} onClick={() => handleCardClick(ev.eventId)}>
                   <img src={ev.mainImage} alt={`festival ${ev.eventId}`} loading='lazy' />
                 </div>
               ))}
