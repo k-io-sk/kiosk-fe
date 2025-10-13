@@ -2,21 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(10rem, 4vw, 8rem);
+  gap: clamp(3rem, 4vw, 5rem);
   margin: 10rem;
+  margin: 7rem auto;
+  box-sizing: border-box;
 }
 
 .posterCard {
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 28rem;
+  max-height: 35rem;
 }
 
 .posterCard img {

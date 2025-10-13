@@ -16,7 +16,7 @@ export default function EventDetailPage() {
       <EventBasicInfo data={data} />
       <EventDescription data={data} />
       <EventVideo data={data} />
-      <EventMap />
+      <EventMap data={data} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import HeaderSearch from './HeaderSearch';
 
@@ -12,9 +12,10 @@ export default function Header() {
         isHomePage ? styles.homeHeader : styles.fixedHeader
       } ${isHomePage ? styles.whiteLogo : ''}`}
     >
-      <h1 className={styles.logo}>LOGO</h1>
+      <Link to='/' className={styles.logo}>
+        LOGO
+      </Link>
       <HeaderSearch />
     </header>
   );
 }
- 
