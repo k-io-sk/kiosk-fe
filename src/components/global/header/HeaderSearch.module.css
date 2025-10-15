@@ -36,9 +36,13 @@
   outline: none;
 }
 
-.searchIconicon {
-  width: 1.2rem;
-  display: block;
+.searchIcon {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.transparentForm .searchIcon {
+  color: #fff;
 }
 
 .transparentForm {
