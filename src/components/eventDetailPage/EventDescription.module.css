@@ -34,15 +34,16 @@
 @media (max-width: 768px) {
   .wrap {
     width: 100%;
-    max-width: 90%;
+    max-width: 100%;
     margin: 2.5rem auto;
+    padding-inline: 1rem;
     align-items: center;
     text-align: left;
     line-height: 1.6;
   }
 
   .title {
-    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
     margin-bottom: 1.5rem;
     word-break: keep-all;
   }

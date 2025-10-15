@@ -106,6 +106,8 @@
     gap: 2rem;
     margin: 3rem 1rem;
     word-break: keep-all;
+    padding-inline: 1rem;
+    word-break: keep-all;
   }
 
   .posterCard {
@@ -124,7 +126,7 @@
   }
 
   .title {
-    font-size: clamp(1.6rem, 5vw, 2rem);
+    font-size: clamp(1.4rem, 5.2vw, 2rem);
     margin: 0.5rem 0 1.5rem;
   }
 
