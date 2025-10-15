@@ -1,14 +1,17 @@
 import { EventCard, FilterBar, Pagination } from '@components/eventListPage';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEventList } from '@hooks/useEventList';
 import styles from './EventListPage.module.css';
 
 export default function EventListPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const presetCategory = location.state?.presetCategory || 'ALL';
+  const presetPeriod = location.state?.presetPeriod || 'ALL';
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
-  const [selectedPeriod, setSelectedPeriod] = useState('ALL');
+  const [selectedCategory, setSelectedCategory] = useState(presetCategory); // ✅ 수정
+  const [selectedPeriod, setSelectedPeriod] = useState(presetPeriod);
   const pageSize = 8;
 
   const categoryMap = {
@@ -25,6 +28,16 @@ export default function EventListPage() {
     이번주: 'THIS_WEEK',
     이번달: 'THIS_MONTH',
   };
+
+  const reverseCategoryMap = {
+    ALL: '전체',
+    SHOW: '공연',
+    EXHIBITION: '전시',
+    FESTIVAL: '축제',
+    EDUEXP: '교육/강좌',
+    ETC: '기타',
+  };
+  const reversePeriodMap = { ALL: '전체', TODAY: '오늘', THIS_WEEK: '이번주', THIS_MONTH: '이번달' };
 
   const { events, totalPages } = useEventList({
     category: selectedCategory,
@@ -47,7 +60,11 @@ export default function EventListPage() {
 
   return (
     <div className={styles.page}>
-      <FilterBar onFilterChange={handleFilterChange} />
+      <FilterBar
+        onFilterChange={handleFilterChange}
+        selectedCategoryLabel={reverseCategoryMap[selectedCategory]}
+        selectedPeriodLabel={reversePeriodMap[selectedPeriod]}
+      />
       <div className={styles.container}>
         <div className={styles.grid}>
           {events.map((event, index) => (

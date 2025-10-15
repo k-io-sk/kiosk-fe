@@ -26,7 +26,11 @@ export default function FestivalSection({ items = [] }) {
                 <br />
                 인사동 축제에서 특별한 하루를 즐기세요
               </p>
-              <button className={styles.linkBtn} type='button' onClick={() => navigate('/events')}>
+              <button
+                className={styles.linkBtn}
+                type='button'
+                onClick={() => navigate('/events', { state: { presetCategory: 'FESTIVAL', presetPeriod: 'ALL' } })}
+              >
                 보러가기 →
               </button>
             </div>

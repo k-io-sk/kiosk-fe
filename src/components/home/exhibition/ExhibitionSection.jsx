@@ -26,7 +26,11 @@ export default function ExhibitionSection({ items = [] }) {
                 <br />
                 인사동에서 열리는 전시를 만나보세요
               </p>
-              <button className={styles.linkBtn} type='button' onClick={() => navigate('/events')}>
+              <button
+                className={styles.linkBtn}
+                type='button'
+                onClick={() => navigate('/events', { state: { presetCategory: 'EXHIBITION', presetPeriod: 'ALL' } })}
+              >
                 보러가기 →
               </button>
             </div>
