@@ -1,5 +1,5 @@
 import { EventCard, FilterBar, Pagination } from '@components/eventListPage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEventList } from '@hooks/useEventList';
 import styles from './EventListPage.module.css';
@@ -9,9 +9,11 @@ export default function EventListPage() {
   const location = useLocation();
   const presetCategory = location.state?.presetCategory || 'ALL';
   const presetPeriod = location.state?.presetPeriod || 'ALL';
+  const presetKeyword = location.state?.keyword || '';
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(presetCategory); // ✅ 수정
   const [selectedPeriod, setSelectedPeriod] = useState(presetPeriod);
+  const [keyword, setKeyword] = useState(presetKeyword);
   const pageSize = 8;
 
   const categoryMap = {
@@ -37,14 +39,27 @@ export default function EventListPage() {
     EDUEXP: '교육/강좌',
     ETC: '기타',
   };
-  const reversePeriodMap = { ALL: '전체', TODAY: '오늘', THIS_WEEK: '이번주', THIS_MONTH: '이번달' };
+  const reversePeriodMap = {
+    전체: 'ALL',
+    오늘: 'TODAY',
+    이번주: 'THIS_WEEK',
+    이번달: 'THIS_MONTH',
+  };
 
   const { events, totalPages } = useEventList({
     category: selectedCategory,
     period: selectedPeriod,
     page: currentPage,
     size: pageSize,
+    keyword,
   });
+
+  useEffect(() => {
+    if (presetKeyword !== keyword) {
+      setKeyword(presetKeyword);
+      setCurrentPage(1);
+    }
+  }, [presetKeyword]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
