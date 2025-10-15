@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getEventList } from '@api/eventList';
 
-export function useEventList({ category, period, page, size }) {
+export function useEventList({ category, period, page, size, keyword = '' }) {
   const [events, setEvents] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ export function useEventList({ category, period, page, size }) {
       const res = await getEventList({
         eventCategory: category,
         eventPeriod: period,
-        keyword: '',
+        keyword,
         pageNum: page,
         pageSize: size,
       });
@@ -24,7 +24,7 @@ export function useEventList({ category, period, page, size }) {
       setTotalPages(data.totalPages || 1);
     };
     fetch();
-  }, [category, period, page, size]);
+  }, [category, period, page, size, keyword]);
 
   return { events, totalPages };
 }

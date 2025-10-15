@@ -1,14 +1,19 @@
 import { EventCard, FilterBar, Pagination } from '@components/eventListPage';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEventList } from '@hooks/useEventList';
 import styles from './EventListPage.module.css';
 
 export default function EventListPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const presetCategory = location.state?.presetCategory || 'ALL';
+  const presetPeriod = location.state?.presetPeriod || 'ALL';
+  const presetKeyword = location.state?.keyword || '';
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
-  const [selectedPeriod, setSelectedPeriod] = useState('ALL');
+  const [selectedCategory, setSelectedCategory] = useState(presetCategory); // ✅ 수정
+  const [selectedPeriod, setSelectedPeriod] = useState(presetPeriod);
+  const [keyword, setKeyword] = useState(presetKeyword);
   const pageSize = 8;
 
   const categoryMap = {
@@ -26,12 +31,35 @@ export default function EventListPage() {
     이번달: 'THIS_MONTH',
   };
 
+  const reverseCategoryMap = {
+    ALL: '전체',
+    SHOW: '공연',
+    EXHIBITION: '전시',
+    FESTIVAL: '축제',
+    EDUEXP: '교육/강좌',
+    ETC: '기타',
+  };
+  const reversePeriodMap = {
+    전체: 'ALL',
+    오늘: 'TODAY',
+    이번주: 'THIS_WEEK',
+    이번달: 'THIS_MONTH',
+  };
+
   const { events, totalPages } = useEventList({
     category: selectedCategory,
     period: selectedPeriod,
     page: currentPage,
     size: pageSize,
+    keyword,
   });
+
+  useEffect(() => {
+    if (presetKeyword !== keyword) {
+      setKeyword(presetKeyword);
+      setCurrentPage(1);
+    }
+  }, [presetKeyword]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -47,7 +75,11 @@ export default function EventListPage() {
 
   return (
     <div className={styles.page}>
-      <FilterBar onFilterChange={handleFilterChange} />
+      <FilterBar
+        onFilterChange={handleFilterChange}
+        selectedCategoryLabel={reverseCategoryMap[selectedCategory]}
+        selectedPeriodLabel={reversePeriodMap[selectedPeriod]}
+      />
       <div className={styles.container}>
         <div className={styles.grid}>
           {events.map((event, index) => (

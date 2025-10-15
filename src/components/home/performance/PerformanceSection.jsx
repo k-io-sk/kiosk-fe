@@ -36,7 +36,11 @@ export default function PerformanceSection({ items = [] }) {
                 <br />
                 인사동 공연에서 특별한 순간을 만나보세요
               </p>
-              <button className={styles.linkBtn} type='button' onClick={() => navigate('/events')}>
+              <button
+                className={styles.linkBtn}
+                type='button'
+                onClick={() => navigate('/events', { state: { presetCategory: 'SHOW', presetPeriod: 'ALL' } })}
+              >
                 보러가기 →
               </button>
             </div>
