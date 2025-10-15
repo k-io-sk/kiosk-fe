@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { MainLayout } from '../layouts';
+import ScrollToTop from '../components/global/scroll/ScrollToTop.jsx';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const EventListPage = lazy(() => import('../pages/EventListPage'));
@@ -32,6 +33,7 @@ export default function AppRouter() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path='/' element={<MainLayout />}>
