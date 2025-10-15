@@ -55,3 +55,34 @@
   width: 100%;
   text-align: left;
 }
+
+@media (max-width: 768px) {
+  .wrap {
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+  }
+
+  .videoBox {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #f2f2f2;
+  }
+
+  .videoTitle {
+    font-size: 0.8rem;
+    top: 0.4rem;
+    left: 0.6rem;
+  }
+
+  .playButton {
+    font-size: 2rem;
+  }
+
+  .caption {
+    margin-top: 2rem;
+    font-size: clamp(1.2rem, 4.8vw, 1.6rem);
+    text-align: left;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+}

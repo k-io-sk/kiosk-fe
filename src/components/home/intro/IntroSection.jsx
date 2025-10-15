@@ -1,6 +1,6 @@
 import styles from './IntroSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
-import introImg from '@assets/images/intro.png';
+import introImg from '@assets/images/intro.webp';
 
 export default function IntoSection() {
   return (

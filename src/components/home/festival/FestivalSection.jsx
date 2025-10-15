@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../exhibition/ExhibitionSection.module.css';
-import festivalImg from '@assets/images/festival.png';
+import festivalImg from '@assets/images/festival.webp';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
 
 export default function FestivalSection({ items = [] }) {
@@ -40,7 +40,7 @@ export default function FestivalSection({ items = [] }) {
             <div className={styles.gallery}>
               {list.map((ev) => (
                 <div className={styles.card} key={ev.eventId} onClick={() => handleCardClick(ev.eventId)}>
-                  <img src={ev.mainImage} alt={`festival ${ev.eventId}`} loading='lazy' />
+                  <img src={ev.mainImage} alt={`festival ${ev.eventId}`} loading='lazy' decoding='async' />
                 </div>
               ))}
             </div>

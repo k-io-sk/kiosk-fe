@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './PerformanceSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
-import performanceImg from '@assets/images/performance.png';
+import performanceImg from '@assets/images/performance.webp';
 
 export default function PerformanceSection({ items = [] }) {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function PerformanceSection({ items = [] }) {
             <div className={styles.gallery}>
               {list.map((ev) => (
                 <div className={styles.card} key={ev.eventId} onClick={() => handleCardClick(ev.eventId)}>
-                  <img src={ev.mainImage} alt={`show ${ev.eventId}`} loading='lazy' />
+                  <img src={ev.mainImage} alt={`show ${ev.eventId}`} loading='lazy' decoding='async' />
                 </div>
               ))}
             </div>

@@ -1,5 +1,5 @@
 .page {
-  background-image: url('@assets/images/bgTexture.png');
+  background-image: url('@assets/images/bgTexture.webp');
   background-size: cover;
   background-repeat: repeat;
   background-position: center;
@@ -78,4 +78,21 @@
 .categoryList li:hover,
 .subFilter li:hover {
   font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .container {
+    padding: 28px 20px;
+  }
 }

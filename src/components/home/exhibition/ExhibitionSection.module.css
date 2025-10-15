@@ -130,3 +130,53 @@
   transform: translateY(-6px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    padding: 0 1.2rem;
+    text-align: center;
+    justify-items: center;
+    gap: 8rem;
+  }
+
+  .description {
+    margin-top: auto;
+  }
+
+  .texts {
+    margin-left: 2rem;
+    align-items: center;
+  }
+
+  .title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .desc {
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .linkBtn {
+    font-size: 1rem;
+  }
+
+  .gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: auto;
+  }
+
+  .card {
+    flex: 0 0 auto;
+    width: clamp(7rem, 28vw, 9rem);
+    aspect-ratio: 3 / 4;
+  }
+}

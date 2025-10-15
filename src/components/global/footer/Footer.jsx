@@ -17,10 +17,14 @@ export default function Footer() {
           </nav>
 
           <div className={styles.contactInfo}>
-            <img src={locationIcon} alt='' className={styles.iconImg} />
-            <span>(우)04535 서울 중구 소공로 70, 서울광장위쪽(포스트타워) 15층, 12345</span>
-            <img src={phoneIcon} alt='' className={styles.iconImg} />
-            <span>02-6450-3800</span>
+            <div className={styles.contactRow}>
+              <img src={locationIcon} alt='' className={styles.iconImg} />
+              <span>(우)04535 서울 중구 소공로 70, 서울광장위쪽(포스트타워) 15층, 12345</span>
+            </div>
+            <div className={styles.contactRow}>
+              <img src={phoneIcon} alt='' className={styles.iconImg} />
+              <span>02-6450-3800</span>
+            </div>
           </div>
 
           <p className={styles.copy}>

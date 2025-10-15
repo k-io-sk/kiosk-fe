@@ -5,7 +5,7 @@ export default function EventCard({ event }) {
 
   return (
     <div className={styles.card}>
-      <img src={mainImage} alt={title} className={styles.img} />
+      <img src={mainImage} alt={title} className={styles.img} loading='lazy' decoding='async' />
       <p className={styles.title}>{title}</p>
       <p className={styles.date}>
         {startDate} ~ {endDate}
