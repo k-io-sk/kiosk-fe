@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { getMainEvents } from '@api/homeAPI';
 
-export default function useMainEventsHook() {
+export default function useMainEvents() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [raw, setRaw] = useState(null);

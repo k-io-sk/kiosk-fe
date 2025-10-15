@@ -1,4 +1,4 @@
-import useMainEvents from '@hooks/useMainEventsHook';
+import useMainEvents from '@hooks/useMainEvents';
 import PageLoader from '../components/global/pageLoader/PageLoader';
 import IntroSection from '@components/home/intro/IntroSection';
 import ExhibitionSection from '@components/home/exhibition/ExhibitionSection';

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { EventBasicInfo, EventDescription, EventVideo, EventMap } from '@components/eventDetailPage';
 import PageLoader from '../components/global/pageLoader/PageLoader';
 import styles from './EventDetailPage.module.css';
-import useEventDetail from '../hooks/useEventDetailHook';
+import useEventDetail from '../hooks/useEventDetail';
 
 export default function EventDetailPage() {
   const { id } = useParams();
