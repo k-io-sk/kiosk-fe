@@ -59,7 +59,7 @@
 @media (max-width: 768px) {
   .wrap {
     margin: 2.5rem auto;
-    padding: 0 1rem;
+    padding-inline: 1rem;
   }
 
   .videoBox {
@@ -83,6 +83,7 @@
     font-size: clamp(1.2rem, 4.8vw, 1.6rem);
     text-align: left;
     line-height: 1.4;
-    word-break: keep-all;
-  }
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;  }
 }
