@@ -14,7 +14,12 @@ export default function EventBasicInfo({ data }) {
       <section className={styles.wrap} aria-labelledby='event-basic-title'>
         {/* 포스터 */}
         <div className={styles.posterCard}>
-          <img src={safe(mainImage) !== '-' ? mainImage : artweekPoster} alt={`${safe(title)} 포스터`} />
+          <img
+            src={safe(mainImage) !== '-' ? mainImage : artweekPoster}
+            alt={`${safe(title)} 포스터`}
+            loading='lazy'
+            decoding='async'
+          />
         </div>
 
         {/* 기본 정보 */}

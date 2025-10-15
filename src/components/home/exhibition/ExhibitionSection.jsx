@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './ExhibitionSection.module.css';
 import SectionWrapper from '../../global/sectionWrapper/SectionWrapper';
-import exhibitionImg from '@assets/images/exhibition.png';
+import exhibitionImg from '@assets/images/exhibition.webp';
 
 export default function ExhibitionSection({ items = [] }) {
   const navigate = useNavigate();
@@ -40,7 +40,12 @@ export default function ExhibitionSection({ items = [] }) {
             <div className={styles.gallery}>
               {list.map((event) => (
                 <div key={event.eventId} className={styles.card} onClick={() => handleCardClick(event.eventId)}>
-                  <img src={event.mainImage} alt={`${event.eventCategory} ${event.eventId}`} loading='lazy' />
+                  <img
+                    src={event.mainImage}
+                    alt={`${event.eventCategory} ${event.eventId}`}
+                    loading='lazy'
+                    decoding='async'
+                  />
                 </div>
               ))}
             </div>
