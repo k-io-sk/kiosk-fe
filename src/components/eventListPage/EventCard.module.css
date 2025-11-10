@@ -27,3 +27,15 @@
   color: #666;
   margin: 4px 0;
 }
+
+@media (max-width: 768px) {
+  .img {
+    height: 330px;
+  }
+}
+
+@media (max-width: 430px) {
+  .img {
+    height: 250px;
+  }
+}
