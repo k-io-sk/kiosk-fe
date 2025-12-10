@@ -61,10 +61,6 @@
   cursor: pointer;
 }
 
-.submitButton:hover {
-  background: #e8e1d7;
-}
-
 .resultSection {
   width: 100%;
   display: flex;
