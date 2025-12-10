@@ -12,10 +12,6 @@
   transition: 0.2s;
 }
 
-.card:hover {
-  border-color: #b3b3b3;
-}
-
 .selected {
   border-radius: 50px;
   border: 4px solid rgba(0, 0, 0, 0.4);
