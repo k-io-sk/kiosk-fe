@@ -7,6 +7,7 @@ const HomePage = lazy(() => import('../pages/HomePage'));
 const EventListPage = lazy(() => import('../pages/EventListPage'));
 const EventDetailPage = lazy(() => import('../pages/EventDetailPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFound.jsx'));
+const MbtiKioskPage = lazy(() => import('../pages/MbtiKioskPage'));
 
 const PageLoader = () => (
   <div
@@ -41,6 +42,7 @@ export default function AppRouter() {
               <Route key={path} path={path} element={element} />
             ))}
           </Route>
+          <Route path='/mbti' element={<MbtiKioskPage />} />
         </Routes>
       </Suspense>
     </Router>

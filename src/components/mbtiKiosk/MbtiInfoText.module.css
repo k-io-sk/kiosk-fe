@@ -1,0 +1,30 @@
+.textWrap {
+  color: #000;
+  text-align: center;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 80px;
+  margin-top: 257px;
+}
+
+.point {
+  color: #ff5900;
+}
+
+@media (max-height: 1200px) {
+  .textWrap {
+    margin-top: 100px;
+    font-size: 25px;
+    line-height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .textWrap {
+    margin-top: 40px;
+    font-size: 16px;
+    line-height: 28px;
+    padding: 0 20px;
+  }
+}
