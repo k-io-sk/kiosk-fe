@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { MainLayout } from '../layouts';
 import ScrollToTop from '../components/global/scroll/ScrollToTop.jsx';
+import MobileOnlyRoute from './MobileOnlyRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const EventListPage = lazy(() => import('../pages/EventListPage'));
 const EventDetailPage = lazy(() => import('../pages/EventDetailPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFound.jsx'));
 const MbtiKioskPage = lazy(() => import('../pages/MbtiKioskPage'));
+const MbtiResultPage = lazy(() => import('../pages/MbtiResultPage'));
 
 const PageLoader = () => (
   <div
@@ -29,6 +31,14 @@ export default function AppRouter() {
     { path: '', element: <HomePage /> },
     { path: 'events', element: <EventListPage /> },
     { path: 'events/:id', element: <EventDetailPage /> },
+    {
+      path: 'mbti/result',
+      element: (
+        <MobileOnlyRoute redirectTo='/'>
+          <MbtiResultPage />
+        </MobileOnlyRoute>
+      ),
+    },
     { path: '*', element: <NotFoundPage /> },
   ];
 

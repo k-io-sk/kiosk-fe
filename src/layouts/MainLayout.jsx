@@ -8,10 +8,16 @@ export default function MainLayout() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
+  const hideBackBarPaths = ['/mbti/result'];
+  const hideBackBar = hideBackBarPaths.includes(location.pathname);
+
   return (
-    <div className={`${styles.layout} ${isHomePage ? styles.isHome : styles.isSub}`}>
+    <div
+      className={`${styles.layout} 
+      ${isHomePage ? styles.isHome : hideBackBar ? styles.isSubNoBack : styles.isSub}`}
+    >
       <Header />
-      {!isHomePage && <BackBar />}
+      {!isHomePage && !hideBackBar && <BackBar />}
       <main className={styles.content}>
         <Outlet />
       </main>
