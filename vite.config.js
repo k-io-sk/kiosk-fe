@@ -14,6 +14,7 @@ export default defineConfig({
       { find: '@layouts', replacement: '/src/layouts' },
       { find: '@assets', replacement: '/src/assets' },
       { find: '@hooks', replacement: '/src/hooks' },
+      { find: '@global', replacement: '/src/components/global' },
     ],
   },
 });

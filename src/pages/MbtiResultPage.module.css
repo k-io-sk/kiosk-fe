@@ -1,3 +1,17 @@
+.centerWrap {
+  min-height: calc(100vh - 400px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerText {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+  line-height: 1.6;
+}
+
 .page {
   width: 100%;
   min-height: 100vh;
@@ -5,7 +19,7 @@
 }
 
 .container {
-  max-width: 24rem; /* 384px */
+  max-width: 24rem;
   margin: 0 auto;
   padding: 0 1.2rem;
 }

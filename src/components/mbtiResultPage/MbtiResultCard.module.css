@@ -1,7 +1,7 @@
 .card {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 28px;
   width: 100%;
   padding: 20px 20px;
@@ -22,22 +22,21 @@
 }
 
 .info {
-  flex: 0 1 320px;
+  width: 320px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .title {
-  margin: 14px 0;
-  font-size: 17px;
+  margin: 14px 0 10px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.4;
   color: #111;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: keep-all;
 }
 
 .metaList {
