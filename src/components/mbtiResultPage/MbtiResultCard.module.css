@@ -1,0 +1,89 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+  width: 100%;
+  padding: 20px 20px;
+}
+
+.thumbnailWrapper {
+  flex: 0 0 148px;
+  width: 148px;
+  aspect-ratio: 3 / 4;
+}
+
+.thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18)) drop-shadow(0 18px 36px rgba(0, 0, 0, 0.28));
+}
+
+.info {
+  flex: 0 1 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 14px 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metaList {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+
+  font-size: 9px;
+  font-weight: 300;
+  line-height: 16px;
+  color: #06394a;
+}
+
+.metaList li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  column-gap: 6px;
+  align-items: start;
+}
+
+.label {
+  color: rgba(6, 57, 74, 0.55);
+  letter-spacing: -0.2px;
+}
+
+.value {
+  color: #06394a;
+  line-height: 12px;
+  word-break: keep-all;
+}
+
+.detailButton {
+  align-self: flex-start;
+
+  display: flex;
+  width: 65px;
+  height: 17px;
+  padding: 4.162px 11.89px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 2px;
+  border: 0.5px solid rgba(73, 80, 83, 0.8);
+  background: rgba(255, 255, 255, 0.3);
+
+  font-size: 8px;
+  color: #06394a;
+  cursor: pointer;
+}

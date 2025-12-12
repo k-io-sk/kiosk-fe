@@ -34,3 +34,6 @@ footer {
   padding-top: calc(var(--header-h) + var(--backbar-h));
 }
 
+.isSubNoBack .content {
+  padding-top: var(--header-h);
+}
