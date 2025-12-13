@@ -9,8 +9,8 @@ export default function MenuOverlay({ open, onClose }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className={styles.backdrop} role='dialog' aria-modal='true'>
-      <nav className={styles.panel}>
+    <div className={styles.backdrop} role='dialog' aria-modal='true' onClick={onClose}>
+      <nav className={styles.panel} onClick={(e) => e.stopPropagation()}>
         <ul className={styles.menu}>
           <li>
             <Link to='/about' className={`${styles.link} ${isActive('/about') ? styles.active : ''}`} onClick={onClose}>

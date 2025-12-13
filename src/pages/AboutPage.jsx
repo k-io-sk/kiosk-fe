@@ -48,10 +48,7 @@ export default function AboutPage() {
           </li>
           <li>
             <FiFileText className={styles.icon} />
-            <span className={styles.text}>
-              이벤트 상세 정보 제공
-              <span className={styles.subText}>(장소, 일시, 가격, 지도)</span>
-            </span>
+            <span className={styles.text}>이벤트 상세 정보 제공 (장소, 일시, 가격, 지도)</span>
           </li>
           <li>
             <FiShuffle className={styles.icon} />
