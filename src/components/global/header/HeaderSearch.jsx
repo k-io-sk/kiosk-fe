@@ -1,12 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './HeaderSearch.module.css';
 import { IoSearch } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 
 export default function HeaderSearch({ resetSearch }) {
-  const location = useLocation();
   const navigate = useNavigate();
-  const isIntroPage = location.pathname === '/';
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
@@ -19,9 +17,9 @@ export default function HeaderSearch({ resetSearch }) {
   };
 
   return (
-    <form onSubmit={handleSearch} className={`${styles.form} ${isIntroPage ? styles.transparentForm : ''}`}>
+    <form onSubmit={handleSearch} className={`${styles.form} ${styles.transparentForm}`}>
       <input
-        className={`${styles.input} ${isIntroPage ? styles.whiteInput : ''}`}
+        className={`${styles.input} ${styles.whiteInput}`}
         type='search'
         placeholder='검색'
         value={searchText}
