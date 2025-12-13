@@ -6,6 +6,7 @@ import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import QrCode from '@global/qr/QrCode';
+import logoImg from '@/assets/images/jongno_black.png';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
@@ -123,13 +124,15 @@ const MbtiKioskPage = () => {
   }, [resultList]);
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${!isMobile ? styles.kiosk : ''}`}>
       <header className={styles.header}>
-        <div className={styles.logo}>LOGO</div>
+        <div className={styles.logo}>
+          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logoImg} />
+        </div>
 
         <div className={styles.moreBox}>
           <div className={styles.more}>더 많은 이벤트 보러가기</div>
-          <QrCode value={LIST_URL} size={84} />
+          <QrCode value={LIST_URL} size={isMobile ? 50 : 150} />
         </div>
       </header>
 
@@ -163,7 +166,14 @@ const MbtiKioskPage = () => {
 
               {error && <div className={styles.spinnerWrapper}>추천 결과를 불러오지 못했어요</div>}
 
-              {!loading && !error && <MbtiResult resultList={resultList} topQrUrl={topQrUrl} onBack={handleBack} />}
+              {!loading && !error && (
+                <MbtiResult
+                  resultList={resultList}
+                  topQrUrl={topQrUrl}
+                  onBack={handleBack}
+                  qrSize={isMobile ? 50 : 80}
+                />
+              )}
             </div>
           )}
         </section>

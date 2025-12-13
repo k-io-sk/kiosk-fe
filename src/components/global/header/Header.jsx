@@ -4,6 +4,7 @@ import HeaderSearch from './HeaderSearch';
 import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import MenuOverlay from './MenuOverlay';
+import logoImg from '@/assets/images/jongno.png';
 
 export default function Header() {
   const location = useLocation();
@@ -32,7 +33,7 @@ export default function Header() {
         }`}
       >
         <Link to='/' className={styles.logo} onClick={handleLogoClick}>
-          LOGO
+          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logoImg} />
         </Link>
 
         <div className={styles.right}>

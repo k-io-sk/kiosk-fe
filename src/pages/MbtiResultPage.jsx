@@ -4,6 +4,8 @@ import MbtiResultCard from '../components/mbtiResultPage/MbtiResultCard';
 import styles from './MbtiResultPage.module.css';
 import { useEventRecommendSummary } from '@hooks/useEventRecommendSummary';
 
+import { shareMbtiResult } from '@/utils/kakao/shareMbtiResult';
+
 const MbtiResultPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -31,6 +33,19 @@ const MbtiResultPage = () => {
       imageUrl: e.mainImage,
     }));
   }, [summary]);
+
+  const handleKakaoShare = async () => {
+    try {
+      const shareUrl = window.location.origin + window.location.pathname + '?' + searchParams.toString();
+
+      const imageUrl = cards?.[0]?.imageUrl ?? 'https://skukiosk.netlify.app/og-image.png';
+
+      await shareMbtiResult({ shareUrl, imageUrl });
+    } catch (e) {
+      console.error(e);
+      alert('카카오 공유 실패');
+    }
+  };
 
   const handleClickDetail = (eventId) => {
     navigate(`/events/${eventId}`);
@@ -98,7 +113,7 @@ const MbtiResultPage = () => {
             인사동 이벤트 더 알아보기
           </button>
 
-          <button type='button' className={styles.shareButton} onClick={() => console.log('share test result')}>
+          <button type='button' className={styles.shareButton} onClick={handleKakaoShare}>
             테스트 공유하기
           </button>
         </section>
