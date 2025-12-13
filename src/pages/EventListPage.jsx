@@ -1,34 +1,32 @@
-import { EventCard, FilterBar, Pagination } from '@components/eventListPage';
+import { EventCard, FilterBar, Pagination, EventRecommend } from '@components/eventListPage';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useEventList } from '@hooks/useEventList';
+import { useEventRecommend } from '@hooks/useEventRecommend';
 import styles from './EventListPage.module.css';
+import isMobileDevice from '@utils/isMobileDevice';
 
 export default function EventListPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const presetCategory = location.state?.presetCategory || 'ALL';
-  const presetPeriod = location.state?.presetPeriod || 'ALL';
   const presetKeyword = location.state?.keyword || '';
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const categoryFromURL = searchParams.get('category') || location.state?.presetCategory || 'ALL';
-  const periodFromURL = searchParams.get('period') || location.state?.presetPeriod || 'ALL';
   const keywordFromURL = searchParams.get('q') || location.state?.keyword || '';
   const pageFromURL = Number(searchParams.get('page') || 1);
 
   const [currentPage, setCurrentPage] = useState(pageFromURL);
   const [selectedCategory, setSelectedCategory] = useState(categoryFromURL);
-  const [selectedPeriod, setSelectedPeriod] = useState(periodFromURL);
   const [keyword, setKeyword] = useState(keywordFromURL);
 
   useEffect(() => {
     setSelectedCategory(categoryFromURL);
-    setSelectedPeriod(periodFromURL);
     setKeyword(keywordFromURL);
     setCurrentPage(pageFromURL);
-  }, [categoryFromURL, periodFromURL, keywordFromURL, pageFromURL]);
+  }, [categoryFromURL, keywordFromURL, pageFromURL]);
 
   const pageSize = 8;
 
@@ -40,12 +38,6 @@ export default function EventListPage() {
     '교육/강좌': 'EDUEXP',
     기타: 'ETC',
   };
-  const periodMap = {
-    전체: 'ALL',
-    오늘: 'TODAY',
-    이번주: 'THIS_WEEK',
-    이번달: 'THIS_MONTH',
-  };
 
   const reverseCategoryMap = {
     ALL: '전체',
@@ -55,19 +47,17 @@ export default function EventListPage() {
     EDUEXP: '교육/강좌',
     ETC: '기타',
   };
-  const reversePeriodMap = {
-    ALL: '전체',
-    TODAY: '오늘',
-    THIS_WEEK: '이번주',
-    THIS_MONTH: '이번달',
-  };
 
   const { events, totalPages } = useEventList({
     category: selectedCategory,
-    period: selectedPeriod,
     page: currentPage,
     size: pageSize,
     keyword,
+  });
+
+  const { events: recommendEvents, loading } = useEventRecommend({
+    mode: 'random',
+    requestKey: 1,
   });
 
   useEffect(() => {
@@ -78,11 +68,10 @@ export default function EventListPage() {
   }, [presetKeyword]);
 
   const syncURL = (next) => {
-    // next: { category, period, q, page }
+    // next: { category, q, page }
     setSearchParams(
       {
         category: next.category ?? selectedCategory,
-        period: next.period ?? selectedPeriod,
         q: next.q ?? keyword,
         page: String(next.page ?? currentPage),
       },
@@ -95,23 +84,19 @@ export default function EventListPage() {
     syncURL({ page });
   };
 
-  const handleFilterChange = (categoryLabel, periodLabel) => {
+  const handleFilterChange = (categoryLabel) => {
     const mappedCategory = categoryMap[categoryLabel] || 'ALL';
-    const mappedPeriod = periodMap[periodLabel] || 'ALL';
 
     setSelectedCategory(mappedCategory);
-    setSelectedPeriod(mappedPeriod);
     setCurrentPage(1);
-    syncURL({ category: mappedCategory, period: mappedPeriod, page: 1 });
+    syncURL({ category: mappedCategory, page: 1 });
   };
 
   return (
     <div className={styles.page}>
-      <FilterBar
-        onFilterChange={handleFilterChange}
-        selectedCategoryLabel={reverseCategoryMap[selectedCategory]}
-        selectedPeriodLabel={reversePeriodMap[selectedPeriod]}
-      />
+      {isMobileDevice() && <EventRecommend events={recommendEvents} />}
+
+      <FilterBar onFilterChange={handleFilterChange} selectedCategoryLabel={reverseCategoryMap[selectedCategory]} />
       <div className={styles.container}>
         <div className={styles.grid}>
           {events.map((event, index) => (
