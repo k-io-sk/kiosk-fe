@@ -1,21 +1,42 @@
 import { useEffect, useState } from 'react';
 import { getRecommendEvents } from '@api/eventRecommendAPI';
+import { getRandomEventsByCategory } from '@api/eventRecommendAPI';
 
-export function useEventRecommend(mbti, requestKey) {
+const pickFields = (e) => ({
+  eventId: e.eventId,
+  title: e.title,
+  location: e.location,
+  startDate: e.startDate,
+  endDate: e.endDate,
+  mainImage: e.mainImage,
+});
+
+export function useEventRecommend({ mbti, requestKey, mode = 'random' } = {}) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!requestKey || !mbti) return;
+    if (requestKey === undefined) return;
 
     const fetch = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        const list = await getRecommendEvents(mbti);
-        setEvents(list || []);
+        let res;
+
+        if (mode === 'mbti' && mbti) {
+          res = await getRecommendEvents(mbti);
+          setEvents(Array.isArray(res) ? res : []);
+          return;
+        }
+
+        if (mode === 'random') {
+          const result = await getRandomEventsByCategory();
+          const list = Array.isArray(result?.data) ? result.data.map(pickFields) : [];
+          setEvents(list);
+        }
       } catch (e) {
         setError(e);
         setEvents([]);
@@ -25,7 +46,7 @@ export function useEventRecommend(mbti, requestKey) {
     };
 
     fetch();
-  }, [mbti, requestKey]);
+  }, [mbti, requestKey, mode]);
 
   return { events, loading, error };
 }

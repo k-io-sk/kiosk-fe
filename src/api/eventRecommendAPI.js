@@ -11,3 +11,7 @@ export const getRecommendEvents = async (mbti) => {
     throw err;
   }
 };
+
+export const getRandomEventsByCategory = async () => {
+  return APIService.public.get('/api/events/random-by-category');
+};
