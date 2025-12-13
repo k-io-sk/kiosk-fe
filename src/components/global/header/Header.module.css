@@ -79,6 +79,12 @@
   transform: rotate(90deg);
 }
 
+.homeMenuBtn {
+  position: absolute;
+  top: calc((var(--header-h) - 2.25rem) / 2);
+  right: 1.5rem;
+}
+
 .menuIcon {
   font-size: 1.7rem;
   color: #fff;

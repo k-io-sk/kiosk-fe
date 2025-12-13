@@ -44,7 +44,11 @@ export default function Header() {
 
       <button
         type='button'
-        className={`${styles.fixedMenuBtn} ${menuOpen ? styles.open : ''}`}
+        className={`
+    ${styles.fixedMenuBtn}
+    ${menuOpen ? styles.open : ''}
+    ${isHomePage ? styles.homeMenuBtn : ''}
+  `}
         onClick={() => setMenuOpen((v) => !v)}
         aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
       >
