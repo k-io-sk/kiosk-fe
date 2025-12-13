@@ -24,16 +24,15 @@
   background-color: #353e5c;
 }
 
-.whiteLogo .logo {
-  color: #ffffff;
+.logo {
+  display: flex;
+  align-items: center;
 }
 
-.logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
+.logoImg {
+  height: 2.4rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .right {
@@ -96,5 +95,9 @@
   }
   .fixedMenuBtn {
     right: 1rem;
+  }
+
+  .logoImg {
+    height: 2rem;
   }
 }

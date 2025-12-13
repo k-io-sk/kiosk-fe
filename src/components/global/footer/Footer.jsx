@@ -1,12 +1,15 @@
 import styles from './Footer.module.css';
 import locationIcon from '@assets/images/location.png';
 import phoneIcon from '@assets/images/phone.png';
+import logoImg from '@/assets/images/jongno.png';
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.logo}>LOGO</div>
+        <div className={styles.logo}>
+          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logoImg} />
+        </div>
 
         <div className={styles.siteInfo}>
           <nav className={styles.nav}>
