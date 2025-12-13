@@ -10,6 +10,7 @@ const EventDetailPage = lazy(() => import('../pages/EventDetailPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFound.jsx'));
 const MbtiKioskPage = lazy(() => import('../pages/MbtiKioskPage'));
 const MbtiResultPage = lazy(() => import('../pages/MbtiResultPage'));
+const AboutPage = lazy(() => import('../pages/AboutPage'));
 
 const PageLoader = () => (
   <div
@@ -39,6 +40,7 @@ export default function AppRouter() {
         </MobileOnlyRoute>
       ),
     },
+    { path: 'about', element: <AboutPage /> },
     { path: '*', element: <NotFoundPage /> },
   ];
 
