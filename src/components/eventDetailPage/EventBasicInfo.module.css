@@ -34,11 +34,11 @@
 }
 
 .title {
-  font-size: clamp(2.8rem, 3vw, 2rem);
+  font-size: clamp(2rem, 3vw, 2rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   margin: 0.2rem 0 2rem;
-  text-align: center;
+  text-align: left;
   color: #000000;
 }
 
@@ -60,6 +60,22 @@
 .meta dd {
   margin: 0;
   color: #06394a;
+}
+
+.period {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.date {
+  font-weight: 500;
+}
+
+.time {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4a6572;
 }
 
 .actions {
@@ -131,19 +147,34 @@
   }
 
   .meta {
-    grid-template-columns: 1fr;
-    row-gap: 0.5rem;
+    grid-template-columns: 5.5rem 1fr;
+    row-gap: 0.6rem;
+    text-align: left;
   }
 
-  .meta > div {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.6rem;
-    align-items: start;
+  .meta dt {
+    width: 5.5rem;
+    white-space: nowrap;
+  }
+
+  .meta dd {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: keep-all;
+    line-height: 1.45;
+  }
+
+  .period {
+    gap: 0.25rem;
+  }
+
+  .time {
+    padding-left: 0.1rem;
   }
 
   .actions {
-    flex-direction: flex;
+    flex-direction: column;
     gap: 0.8rem;
   }
 
