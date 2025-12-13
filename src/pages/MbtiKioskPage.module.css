@@ -1,7 +1,11 @@
 .page {
   width: 100vw;
-  height: 100vh;
-  background: #ffffff;
+  height: 100%;
+  min-height: 100vh;
+  background-image: url('@assets/images/bgTexture.webp');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
