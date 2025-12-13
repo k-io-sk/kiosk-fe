@@ -46,7 +46,8 @@ const MbtiKioskPage = () => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [requestKey, setRequestKey] = useState(0);
+  const [requestKey, setRequestKey] = useState(null);
+  const [requestedMbti, setRequestedMbti] = useState('');
 
   const mbti = useMemo(() => {
     const pick = (a, b) => (selectedTypes.includes(a) ? a : selectedTypes.includes(b) ? b : '');
@@ -58,7 +59,15 @@ const MbtiKioskPage = () => {
     return result.length === 4 ? result : '';
   }, [selectedTypes]);
 
-  const { events: recommendEvents, loading, error } = useEventRecommend(mbti, requestKey);
+  const {
+    events: recommendEvents,
+    loading,
+    error,
+  } = useEventRecommend({
+    mbti: requestedMbti,
+    requestKey,
+    mode: 'mbti',
+  });
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -86,7 +95,9 @@ const MbtiKioskPage = () => {
     }
 
     setShowResult(true);
-    setRequestKey((k) => k + 1);
+
+    setRequestedMbti(mbti);
+    setRequestKey((k) => (k === null ? 1 : k + 1));
   };
 
   const handleBack = () => setShowResult(false);

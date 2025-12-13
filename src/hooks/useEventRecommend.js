@@ -17,7 +17,7 @@ export function useEventRecommend({ mbti, requestKey, mode = 'random' } = {}) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (requestKey === undefined) return;
+    if (requestKey == null) return;
 
     const fetch = async () => {
       try {
