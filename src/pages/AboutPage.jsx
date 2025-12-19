@@ -33,6 +33,10 @@ export default function AboutPage() {
         <p className={styles.desc}>
           원하는 이벤트를 빠르게 검색하고, 카테고리별로 정리된 추천을 통해 나에게 맞는 행사를 쉽게 찾아보세요.
         </p>
+        <p className={styles.desc}>
+          본 서비스는 서울특별시 문화본부 문화정책과가 제공한 ‘서울시 문화행사 정보’(공공누리 제1유형) 데이터를 활용하여
+          재가공한 것입니다.
+        </p>
       </section>
 
       <section className={styles.section}>
