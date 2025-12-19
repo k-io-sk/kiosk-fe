@@ -27,23 +27,16 @@ export default function AppRouter() {
             <Route path='events' element={<EventListPage />} />
             <Route path='events/:id' element={<EventDetailPage />} />
             <Route path='about' element={<AboutPage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Route>
 
-          {/* Mobile */}
-          <Route path='/mobile' element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path='events' element={<EventListPage />} />
-            <Route path='events/:id' element={<EventDetailPage />} />
-            <Route path='about' element={<AboutPage />} />
             <Route
               path='mbti/result'
               element={
-                <MobileOnlyRoute redirectTo='/mobile'>
+                <MobileOnlyRoute redirectTo='/'>
                   <MbtiResultPage />
                 </MobileOnlyRoute>
               }
             />
+
             <Route path='*' element={<NotFoundPage />} />
           </Route>
 
