@@ -1,60 +1,56 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { MainLayout } from '../layouts';
+import KioskLayout from '../layouts/KioskLayout';
 import ScrollToTop from '../components/global/scroll/ScrollToTop.jsx';
 import MobileOnlyRoute from './MobileOnlyRoute';
+import PageLoader from '../components/global/pageLoader/PageLoader';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const EventListPage = lazy(() => import('../pages/EventListPage'));
 const EventDetailPage = lazy(() => import('../pages/EventDetailPage'));
+const AboutPage = lazy(() => import('../pages/AboutPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFound.jsx'));
 const MbtiKioskPage = lazy(() => import('../pages/MbtiKioskPage'));
 const MbtiResultPage = lazy(() => import('../pages/MbtiResultPage'));
-const AboutPage = lazy(() => import('../pages/AboutPage'));
-
-const PageLoader = () => (
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      fontSize: '16px',
-      color: '#666',
-    }}
-  >
-    페이지를 불러오는 중...
-  </div>
-);
 
 export default function AppRouter() {
-  const routes = [
-    { path: '', element: <HomePage /> },
-    { path: 'events', element: <EventListPage /> },
-    { path: 'events/:id', element: <EventDetailPage /> },
-    {
-      path: 'mbti/result',
-      element: (
-        <MobileOnlyRoute redirectTo='/'>
-          <MbtiResultPage />
-        </MobileOnlyRoute>
-      ),
-    },
-    { path: 'about', element: <AboutPage /> },
-    { path: '*', element: <NotFoundPage /> },
-  ];
-
   return (
     <Router>
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
+          {/* PC */}
           <Route path='/' element={<MainLayout />}>
-            {routes.map(({ path, element }) => (
-              <Route key={path} path={path} element={element} />
-            ))}
+            <Route index element={<HomePage />} />
+            <Route path='events' element={<EventListPage />} />
+            <Route path='events/:id' element={<EventDetailPage />} />
+            <Route path='about' element={<AboutPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Route>
-          <Route path='/mbti' element={<MbtiKioskPage />} />
+
+          {/* Mobile */}
+          <Route path='/mobile' element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path='events' element={<EventListPage />} />
+            <Route path='events/:id' element={<EventDetailPage />} />
+            <Route path='about' element={<AboutPage />} />
+            <Route
+              path='mbti/result'
+              element={
+                <MobileOnlyRoute redirectTo='/mobile'>
+                  <MbtiResultPage />
+                </MobileOnlyRoute>
+              }
+            />
+            <Route path='*' element={<NotFoundPage />} />
+          </Route>
+
+          {/* Kiosk */}
+          <Route path='/kiosk' element={<KioskLayout />}>
+            <Route index element={<MbtiKioskPage />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>

@@ -5,7 +5,9 @@ import isMobileDevice from '@utils/isMobileDevice';
 const MobileOnlyRoute = ({ children, redirectTo = '/' }) => {
   const location = useLocation();
 
-  if (!isMobileDevice()) {
+  const isMobilePath = location.pathname === '/mobile' || location.pathname.startsWith('/mobile/');
+
+  if (!isMobileDevice() && !isMobilePath) {
     return <Navigate to={redirectTo} replace state={{ from: location.pathname }} />;
   }
   return children;
