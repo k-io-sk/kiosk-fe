@@ -5,6 +5,7 @@ import { useEventList } from '@hooks/useEventList';
 import { useEventRecommend } from '@hooks/useEventRecommend';
 import styles from './EventListPage.module.css';
 import isMobileDevice from '@utils/isMobileDevice';
+import PageLoader from '@components/global/pageLoader/PageLoader';
 
 export default function EventListPage() {
   const navigate = useNavigate();
@@ -48,14 +49,14 @@ export default function EventListPage() {
     ETC: '기타',
   };
 
-  const { events, totalPages } = useEventList({
+  const { events, totalPages, loading } = useEventList({
     category: selectedCategory,
     page: currentPage,
     size: pageSize,
     keyword,
   });
 
-  const { events: recommendEvents, loading } = useEventRecommend({
+  const { events: recommendEvents } = useEventRecommend({
     mode: 'random',
     requestKey: 1,
   });
@@ -91,6 +92,8 @@ export default function EventListPage() {
     setCurrentPage(1);
     syncURL({ category: mappedCategory, page: 1 });
   };
+
+  if (loading) return <PageLoader />;
 
   return (
     <div className={styles.page}>
