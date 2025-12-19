@@ -120,7 +120,7 @@ const MbtiKioskPage = () => {
     if (eventIds.length === 0) return null;
 
     const query = eventIds.map((id) => `eventIds=${id}`).join('&');
-    return `${base}/mbti/result?${query}`;
+    return `${base}/mobile/mbti/result?${query}`;
   }, [resultList]);
 
   return (
