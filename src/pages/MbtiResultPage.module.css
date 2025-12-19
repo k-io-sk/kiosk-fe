@@ -79,14 +79,9 @@
   cursor: pointer;
 }
 
-.eventListButton {
+.eventListButton,
+.shareButton {
   border: 0.5px solid rgba(0, 0, 0, 0.4);
   background: rgba(0, 82, 120, 0.9);
-  color: #ffffff;
-}
-
-.shareButton {
-  border: 0.5px solid rgba(0, 0, 0, 0.3);
-  background: rgba(0, 82, 120, 0.5);
   color: #ffffff;
 }

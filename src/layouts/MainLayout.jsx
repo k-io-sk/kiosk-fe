@@ -6,9 +6,8 @@ import styles from './MainLayout.module.css';
 
 export default function MainLayout() {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
-
-  const hideBackBarPaths = ['/mbti/result'];
+  const isHomePage = location.pathname === '/' || location.pathname === '/mobile';
+  const hideBackBarPaths = ['/mbti/result', '/mobile/mbti/result'];
   const hideBackBar = hideBackBarPaths.includes(location.pathname);
 
   return (
