@@ -91,15 +91,6 @@ export default function EventBasicInfo({ data }) {
               onClick={() => openLink(orgLink)}
               disabled={safe(orgLink) === '-'}
             >
-              신청하기
-            </button>
-
-            <button
-              type='button'
-              className={styles.btn}
-              onClick={() => openLink(orgLink)}
-              disabled={safe(orgLink) === '-'}
-            >
               홈페이지
             </button>
           </div>
