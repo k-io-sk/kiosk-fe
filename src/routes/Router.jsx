@@ -4,6 +4,7 @@ import { MainLayout } from '../layouts';
 import KioskLayout from '../layouts/KioskLayout';
 import ScrollToTop from '../components/global/scroll/ScrollToTop.jsx';
 import MobileOnlyRoute from './MobileOnlyRoute';
+import AddressGuard from './AddressGuard';
 import PageLoader from '../components/global/pageLoader/PageLoader';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
@@ -47,7 +48,14 @@ export default function AppRouter() {
           </Route>
 
           {/* Kiosk */}
-          <Route path='/kiosk' element={<KioskLayout />}>
+          <Route
+            path='/kiosk'
+            element={
+              <AddressGuard mode='kiosk'>
+                <KioskLayout />
+              </AddressGuard>
+            }
+          >
             <Route index element={<MbtiKioskPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
