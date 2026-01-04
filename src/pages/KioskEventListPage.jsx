@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './KioskEventListPage.module.css';
-
+import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskEventCard from '@/components/eventListPage/KioskEventCard';
 import Pagination from '@/components/eventListPage/Pagination';
 
@@ -66,26 +66,7 @@ export default function KioskEventListPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.topHeader}>
-        <div className={styles.headerRow}>
-          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logo} />
-
-          <div className={styles.moreBox}>
-            <p className={styles.more}>더 많은 이벤트 보러가기</p>
-            <QrCode value={LIST_URL} size={116} />
-          </div>
-        </div>
-
-        <nav className={styles.tabs}>
-          <button className={`${styles.tab} ${styles.activeTab}`}>오늘 행사</button>
-
-          <button className={styles.tab} onClick={() => navigate('/kiosk/mbti')}>
-            mbti 추천
-          </button>
-
-          <button className={styles.tab}>프로모션</button>
-        </nav>
-      </header>
+      <KioskHeader />
 
       <main className={styles.content}>
         {loading && (
