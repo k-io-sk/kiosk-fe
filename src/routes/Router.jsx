@@ -14,6 +14,7 @@ const AboutPage = lazy(() => import('../pages/AboutPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFound.jsx'));
 const MbtiKioskPage = lazy(() => import('../pages/MbtiKioskPage'));
 const MbtiResultPage = lazy(() => import('../pages/MbtiResultPage'));
+const KioskEventListPage = lazy(() => import('../pages/KioskEventListPage'));
 
 export default function AppRouter() {
   return (
@@ -49,7 +50,8 @@ export default function AppRouter() {
               </AddressGuard>
             }
           >
-            <Route index element={<MbtiKioskPage />} />
+            <Route path='mbti' element={<MbtiKioskPage />} />
+            <Route path='events' element={<KioskEventListPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>
