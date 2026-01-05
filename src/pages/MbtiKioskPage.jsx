@@ -5,8 +5,7 @@ import MbtiResult from '../components/mbtiKiosk/MbtiResult';
 import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
-import QrCode from '@global/qr/QrCode';
-import logoImg from '@/assets/images/jongno_black.png';
+import KioskHeader from '@/components/global/header/KioskHeader';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
@@ -125,16 +124,7 @@ const MbtiKioskPage = () => {
 
   return (
     <div className={`${styles.page} ${!isMobile ? styles.kiosk : ''}`}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logoImg} />
-        </div>
-
-        <div className={styles.moreBox}>
-          <div className={styles.more}>더 많은 이벤트 보러가기</div>
-          <QrCode value={LIST_URL} size={isMobile ? 50 : 150} />
-        </div>
-      </header>
+      <KioskHeader />
 
       <main className={styles.main}>
         <section className={styles.content}>

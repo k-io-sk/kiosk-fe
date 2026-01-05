@@ -51,10 +51,12 @@
   cursor: pointer;
   padding: 0 0 12px 0;
   color: #111;
+  width: 240px;
+  text-align: center;
+  border-bottom: 12px solid transparent;
+  box-sizing: border-box;
 }
 
 .activeTab {
-  width: 240px;
-  text-align: center;
-  border-bottom: 12px solid #005278;
+  border-bottom-color: #005278;
 }

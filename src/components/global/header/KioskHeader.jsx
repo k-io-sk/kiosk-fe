@@ -6,13 +6,23 @@ import QrCode from '@global/qr/QrCode';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
-export default function KioskHeader({ active = 'today' }) {
+export default function KioskHeader({ active }) {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const go = (path) => {
-    if (location.pathname !== path) navigate(path);
+    if (pathname !== path) navigate(path);
   };
+
+  const resolvedActive = (() => {
+    if (active) return active;
+
+    if (pathname.startsWith('/kiosk/mbti')) return 'mbti';
+    if (pathname.startsWith('/kiosk/promo')) return 'promo';
+    if (pathname.startsWith('/kiosk/events')) return 'events';
+
+    return 'events';
+  })();
 
   return (
     <header className={styles.topHeader}>
@@ -27,21 +37,21 @@ export default function KioskHeader({ active = 'today' }) {
 
       <nav className={styles.tabs}>
         <button
-          className={`${styles.tab} ${active === 'today' ? styles.activeTab : ''}`}
+          className={`${styles.tab} ${resolvedActive === 'events' ? styles.activeTab : ''}`}
           onClick={() => go('/kiosk/events')}
         >
           오늘 행사
         </button>
 
         <button
-          className={`${styles.tab} ${active === 'mbti' ? styles.activeTab : ''}`}
+          className={`${styles.tab} ${resolvedActive === 'mbti' ? styles.activeTab : ''}`}
           onClick={() => go('/kiosk/mbti')}
         >
           mbti 추천
         </button>
 
         <button
-          className={`${styles.tab} ${active === 'promo' ? styles.activeTab : ''}`}
+          className={`${styles.tab} ${resolvedActive === 'promo' ? styles.activeTab : ''}`}
           onClick={() => go('/kiosk/promo')}
         >
           프로모션

@@ -2,8 +2,8 @@
   position: relative;
   margin: 100px auto;
   max-width: 1540px;
-  width: 100%;
-  height: 850px;
+  width: 80%;
+  height: 750px;
   border-radius: 20px;
   border: 3px solid #f8ecde;
   background: #fffbf2;
@@ -38,7 +38,7 @@
 
 .cardsRow {
   display: flex;
-  gap: 150px;
+  gap: 20px;
   justify-content: center;
   width: 100%;
   margin: 24px 0;
@@ -51,8 +51,8 @@
 }
 
 .thumbnail {
-  width: 400px;
-  height: 560px;
+  width: 320px;
+  height: 450px;
   background: #f1e9dd;
   border-radius: 8px;
   overflow: hidden;
@@ -66,9 +66,9 @@
 }
 
 .cardTitle {
-  width: 550px;
+  width: 500px;
   margin-top: 12px;
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
 
   line-height: 1.35;
