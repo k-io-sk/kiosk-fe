@@ -4,14 +4,10 @@ import styles from './KioskEventListPage.module.css';
 import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskEventCard from '@/components/eventListPage/KioskEventCard';
 import Pagination from '@/components/eventListPage/Pagination';
-
-import logoImg from '@/assets/images/jongno_black.png';
-import QrCode from '@global/qr/QrCode';
+import FilterBar from '@/components/eventListPage/FilterBar';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 
 import { getEventList } from '@/api/eventList';
-
-const LIST_URL = 'https://skukiosk.netlify.app/events';
 
 export default function KioskEventListPage() {
   const navigate = useNavigate();
@@ -25,6 +21,22 @@ export default function KioskEventListPage() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const [categoryLabel, setCategoryLabel] = useState('전체');
+
+  const categoryMap = {
+    전체: 'ALL',
+    공연: 'SHOW',
+    전시: 'EXHIBITION',
+    축제: 'FESTIVAL',
+    '교육/강좌': 'EDUEXP',
+    기타: 'ETC',
+  };
+
+  const handleFilterChange = (label) => {
+    setCategoryLabel(label);
+    setPage(1);
+  };
+
   useEffect(() => {
     let mounted = true;
 
@@ -33,10 +45,8 @@ export default function KioskEventListPage() {
         setLoading(true);
         setErrorMsg('');
 
-        const serverPageNum = Math.max(0, page - 1);
-
         const res = await getEventList({
-          eventCategory: 'ALL',
+          eventCategory: categoryMap[categoryLabel] ?? 'ALL',
           pageNum: page,
           pageSize,
         });
@@ -46,6 +56,7 @@ export default function KioskEventListPage() {
         const root = res?.data ? res.data : res;
         const payload = root?.data ?? root ?? {};
         const nextEvents = Array.isArray(payload.content) ? payload.content : [];
+
         setEvents(nextEvents);
         setTotalPages(Number(payload.totalPages) || 1);
       } catch (e) {
@@ -62,13 +73,19 @@ export default function KioskEventListPage() {
     return () => {
       mounted = false;
     };
-  }, [page]);
+  }, [page, categoryLabel]);
 
   return (
     <div className={styles.page}>
       <KioskHeader />
 
       <main className={styles.content}>
+        <FilterBar
+          selectedCategoryLabel={categoryLabel}
+          onFilterChange={handleFilterChange}
+          className={styles.kioskFilter}
+        />
+
         {loading && (
           <div className={styles.spinnerWrapper}>
             <LoadingSpinner size={72} />
@@ -78,7 +95,11 @@ export default function KioskEventListPage() {
         {!loading && errorMsg && <div className={styles.spinnerWrapper}>{errorMsg}</div>}
 
         {!loading && !errorMsg && events.length === 0 && (
-          <div className={styles.spinnerWrapper}>표시할 이벤트가 없어요</div>
+          <div className={styles.emptyWrapper}>
+            해당 카테고리에 등록된 행사가 없습니다.
+            <br />
+            다른 카테고리를 선택해 주세요.
+          </div>
         )}
 
         {!loading && !errorMsg && events.length > 0 && (

@@ -6,44 +6,6 @@
   overflow: hidden;
 }
 
-.topHeader {
-  width: 1820px;
-  height: 425px;
-  background: #ffedc3;
-  padding: 60px 120px;
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.headerRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.logo {
-  margin-top: 40px;
-  height: 80px;
-  width: auto;
-}
-
-.moreBox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
-}
-
-.more {
-  margin: 0;
-  font-size: 40px;
-  font-weight: 600;
-  color: #111;
-}
-
 .tabs {
   margin-top: 80px;
   display: flex;
@@ -83,7 +45,7 @@
 }
 
 .grid {
-  margin-top: 100px;
+  margin-top: 60px;
   display: grid;
   grid-template-columns: repeat(3, 400px);
   justify-content: center;
@@ -108,4 +70,43 @@
 .paginationWrap :global(button[class*='active']) {
   background-color: #fff4da;
   color: #111;
+}
+
+.kioskFilter :global(li) {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 12px;
+  margin-top: 3rem;
+}
+
+.kioskFilter :global(ul) {
+  gap: 48px;
+}
+
+.kioskFilter :global(li[class*='active']) {
+  border-bottom: 6px solid #005278;
+  color: #111;
+}
+
+.emptyText {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 500;
+  color: #111;
+  text-align: center;
+  line-height: 2.5;
+  word-break: keep-all;
+}
+
+.emptyWrapper {
+  height: calc(2250px - 850px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 2.5;
+  text-align: center;
 }
