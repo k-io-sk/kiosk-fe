@@ -1,0 +1,44 @@
+.card {
+  width: 400px;
+  text-align: left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 350px;
+  height: 480px;
+  object-fit: cover;
+  background-color: #ccc;
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  width: 100%;
+  font-size: 30px;
+  font-weight: 700;
+  color: #111;
+  margin: 18px 0 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.place {
+  width: 100%;
+  font-size: 22px;
+  color: #666;
+  margin: 6px 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}

@@ -7,6 +7,7 @@ export default function KakaoMap({
   markerInfo = '',
   onMarkerClick,
   height = 420,
+  isKiosk = false,
 }) {
   const mapRef = useRef(null);
   const mapObjRef = useRef(null);
@@ -26,7 +27,7 @@ export default function KakaoMap({
 
         const map = new kakao.maps.Map(mapRef.current, {
           center,
-          level: 3,
+          level: isKiosk ? 1 : 3,
         });
         mapObjRef.current = map;
 
@@ -73,11 +74,12 @@ export default function KakaoMap({
       if (mapObjRef.current && centerRef.current) {
         mapObjRef.current.relayout();
         mapObjRef.current.setCenter(centerRef.current);
+        mapObjRef.current.setLevel(isKiosk ? 2 : 3);
       }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [latitude, longitude, markerTitle, markerInfo, onMarkerClick]);
+  }, [latitude, longitude, markerTitle, markerInfo, onMarkerClick, isKiosk]);
 
   return (
     <div
