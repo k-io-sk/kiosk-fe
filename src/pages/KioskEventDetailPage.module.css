@@ -1,0 +1,45 @@
+.kiosk {
+  width: 1820px;
+  height: 2250px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.page {
+  width: 1820px;
+  min-height: 2250px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.content {
+  padding: 0;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  margin: 5rem 0 0 10rem;
+  padding: 1.2rem 2.4rem;
+
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  background-color: #ffedc3;
+  color: #111;
+
+  border: none;
+  border-radius: 50px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.fullCenter {
+  width: 100%;
+  min-height: 2250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

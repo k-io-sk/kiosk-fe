@@ -43,13 +43,13 @@
 
 @media (max-width: 768px) {
   .wrap {
-    padding: 2.4rem 1rem;  
-    align-items: left;     
+    padding: 2.4rem 1rem;
+    align-items: left;
     max-width: 95%;
   }
 
   .headerRow {
-    justify-content: left; 
+    justify-content: left;
     width: 100%;
   }
 
@@ -62,11 +62,28 @@
     font-size: clamp(1rem, 4.5vw, 1.2rem);
     color: #666;
     margin: 0.5rem 0 1rem;
-    word-break: keep-all;     
+    word-break: keep-all;
   }
 
   .map {
     min-height: 300px;
     border-radius: 8px;
   }
+}
+
+/* KIOSK (1820 x 2250) */
+.kioskWrap {
+  max-width: 98rem;
+  padding: 2rem 2rem;
+  border-radius: 50px;
+}
+
+.kioskTitle {
+  font-size: 3rem;
+  padding: 10px;
+}
+
+.kioskNote {
+  font-size: 2rem;
+  margin: 0.5rem 0 1.5rem;
 }

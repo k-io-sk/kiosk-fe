@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(3rem, 4vw, 5rem);
+  gap: clamp(5rem, 6vw, 7rem);
   margin: 10rem;
   margin: 7rem auto;
   box-sizing: border-box;
@@ -11,7 +11,7 @@
 
 .posterCard {
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 400 / 565;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,4 +183,41 @@
     height: 2.5rem;
     font-size: 1rem;
   }
+}
+
+/* KIOSK (1820 x 2250) */
+.kioskWrap {
+  gap: 7rem;
+  margin: 3rem 0;
+}
+
+.kioskPosterCard {
+  max-height: none;
+  height: 45rem;
+}
+
+.kioskInfo {
+  width: 55rem;
+  gap: 2.2rem;
+}
+
+.kioskTitle {
+  font-size: 3rem;
+  margin: 0.2rem 0;
+}
+
+.kioskMeta dt {
+  font-size: 1.8rem;
+}
+
+.kioskMeta dd,
+.kioskTime {
+  font-size: 1.8rem;
+  line-height: 1.6;
+}
+
+.kioskBtn {
+  width: 16rem;
+  height: 4rem;
+  font-size: 1.6rem;
 }

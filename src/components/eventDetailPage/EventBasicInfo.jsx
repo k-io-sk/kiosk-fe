@@ -2,7 +2,7 @@ import SectionWrapper from '../global/sectionWrapper/SectionWrapper';
 import styles from './EventBasicInfo.module.css';
 import artweekPoster from '@assets/images/artweek.png';
 
-export default function EventBasicInfo({ data }) {
+export default function EventBasicInfo({ data, kiosk = false }) {
   const {
     mainImage,
     title,
@@ -29,9 +29,9 @@ export default function EventBasicInfo({ data }) {
 
   return (
     <SectionWrapper>
-      <section className={styles.wrap} aria-labelledby='event-basic-title'>
+      <section className={`${styles.wrap} ${kiosk ? styles.kioskWrap : ''}`} aria-labelledby='event-basic-title'>
         {/* 포스터 */}
-        <div className={styles.posterCard}>
+        <div className={`${styles.posterCard} ${kiosk ? styles.kioskPosterCard : ''}`}>
           <img
             src={safe(mainImage) !== '-' ? mainImage : artweekPoster}
             alt={`${safe(title)} 포스터`}
@@ -41,12 +41,12 @@ export default function EventBasicInfo({ data }) {
         </div>
 
         {/* 기본 정보 */}
-        <div className={styles.info}>
-          <h2 id='event-basic-title' className={styles.title}>
+        <div className={`${styles.info} ${kiosk ? styles.kioskInfo : ''}`}>
+          <h2 id='event-basic-title' className={`${styles.title} ${kiosk ? styles.kioskTitle : ''}`}>
             {safe(title)}
           </h2>
 
-          <dl className={styles.meta}>
+          <dl className={`${styles.meta} ${kiosk ? styles.kioskMeta : ''}`}>
             <div>
               <dt>장소</dt>
               <dd>{safe(location)}</dd>
@@ -58,8 +58,9 @@ export default function EventBasicInfo({ data }) {
                 <span className={styles.date}>
                   {safe(startDate)} ~ {safe(endDate)}
                 </span>
-
-                {hasTime && <span className={styles.time}>{safe(eventTime)}</span>}
+                {hasTime && (
+                  <span className={`${styles.time} ${kiosk ? styles.kioskTime : ''}`}>{safe(eventTime)}</span>
+                )}
               </dd>
             </div>
 
@@ -84,16 +85,18 @@ export default function EventBasicInfo({ data }) {
             </div>
           </dl>
 
-          <div className={styles.actions}>
-            <button
-              type='button'
-              className={styles.btn}
-              onClick={() => openLink(orgLink)}
-              disabled={safe(orgLink) === '-'}
-            >
-              홈페이지
-            </button>
-          </div>
+          {!kiosk && (
+            <div className={styles.actions}>
+              <button
+                type='button'
+                className={styles.btn}
+                onClick={() => openLink(orgLink)}
+                disabled={safe(orgLink) === '-'}
+              >
+                홈페이지
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </SectionWrapper>
