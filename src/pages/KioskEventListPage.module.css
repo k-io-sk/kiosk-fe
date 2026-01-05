@@ -95,14 +95,17 @@
   margin-top: 80px;
 }
 
-.centerText {
-  margin-top: 80px;
-  font-size: 28px;
-  text-align: center;
-  color: #111;
+.paginationWrap :global(button) {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.kioskActivePage {
-  background-color: #fff4da !important;
-  color: #111 !important;
+.paginationWrap :global(button[class*='active']) {
+  background-color: #fff4da;
+  color: #111;
 }
