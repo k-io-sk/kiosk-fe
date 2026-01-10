@@ -6,6 +6,7 @@ import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import KioskHeader from '@/components/global/header/KioskHeader';
+import KioskFooter from '@/components/global/footer/KioskFooter';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
@@ -168,6 +169,7 @@ const MbtiKioskPage = () => {
           )}
         </section>
       </main>
+      <KioskFooter />
     </div>
   );
 };

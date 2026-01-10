@@ -1,37 +1,19 @@
 import styles from './Footer.module.css';
-import locationIcon from '@assets/images/location.png';
-import phoneIcon from '@assets/images/phone.png';
-import logoImg from '@/assets/images/jongno.png';
+import witLogo from '@/assets/images/wit.webp';
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          <img src={logoImg} alt='IN:JONGNO 로고' className={styles.logoImg} />
-        </div>
+        <img src={witLogo} alt='Witglobal 로고' className={styles.logo} />
 
-        <div className={styles.siteInfo}>
-          <nav className={styles.nav}>
-            <a href='#'>개인정보처리방침</a>
-            <a href='#'>저작권정책</a>
-            <a href='#'>안전신문고</a>
-            <a href='#'>도로명주소안내</a>
-          </nav>
+        <div className={styles.textBox}>
+          <p className={styles.copyright}>© Witglobal with Heejun, Sieon, Jiu, Chaerin</p>
 
-          <div className={styles.contactInfo}>
-            <div className={styles.contactRow}>
-              <img src={locationIcon} alt='' className={styles.iconImg} />
-              <span>(우)04535 서울 중구 소공로 70, 서울광장위쪽(포스트타워) 15층, 12345</span>
-            </div>
-            <div className={styles.contactRow}>
-              <img src={phoneIcon} alt='' className={styles.iconImg} />
-              <span>02-6450-3800</span>
-            </div>
-          </div>
-
-          <p className={styles.copy}>
-            © Cultural Heritage Administration Royal Palaces and Tombs Center. All rights reserved.
+          <p className={styles.notice}>
+            본 서비스는 서울특별시 문화본부 문화정책과가 제공한
+            <br />
+            ‘서울시 문화행사 정보’(공공누리 제1유형) 데이터를 활용하여 재가공한 것입니다.
           </p>
         </div>
       </div>

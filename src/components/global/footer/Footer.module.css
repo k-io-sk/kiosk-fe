@@ -1,117 +1,53 @@
 .footer {
+  width: 100%;
   background: #06394a;
   color: #dbdbdb;
-  width: 100%;
 }
 
 .container {
-  padding: 1.25rem;
-  display: grid;
-  grid-template-columns: auto 1fr; /* 로고 | 내용 */
-  gap: 1.25rem 2rem;
+  margin-left: 10%;
+  padding: 1.8rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-}
-
-.logoImg {
-  margin: 0 2rem;
-  height: 1.5rem;
+  height: 4rem;
   width: auto;
   object-fit: contain;
+  margin-top: 0.2rem;
 }
 
-.siteInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.nav {
-  display: flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  align-items: center;
-  gap: 0.5rem 5rem;
-  font-size: 0.9rem;
-}
-
-.nav a {
-  color: #dbdbdb;
-  text-decoration: none;
-}
-.nav a:hover {
-  text-decoration: underline;
-}
-
-.contactInfo {
+.textBox {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  color: #979797;
+}
+
+.copyright,
+.notice {
+  margin: 0;
   font-size: 0.9rem;
-}
-
-.contactRow {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  white-space: nowrap;
-}
-
-.iconImg {
-  width: 1rem;
-  height: 1rem;
-  object-fit: contain;
-}
-
-.copy {
-  margin: 0.2rem 0 0;
-  color: #bcbcbc;
-  font-size: 0.8rem;
+  font-weight: 500;
+  color: #dbdbdb;
+  line-height: 1.6rem;
 }
 
 @media (max-width: 768px) {
   .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 2rem 1rem;
+    padding: 1.4rem 1rem;
+    gap: 1rem;
+    margin-left: 0;
   }
 
   .logo {
-    padding: 0.5rem;
-    font-size: 1rem;
+    height: 1.8rem;
   }
 
-  .siteInfo {
-    align-items: center;
-    gap: 1.2rem;
-  }
-
-  .nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem 1.2rem;
-    font-size: 0.7rem;
-  }
-
-  .contactInfo {
-    flex-direction: column;
-    flex-wrap: wrap;
-    white-space: normal;
-    gap: 0.4rem;
-    text-align: center;
-    font-size: 0.7rem;
-  }
-
-  .copy {
-    font-size: 0.5rem;
-    color: #a9a9a9;
-    margin-top: 0.5rem;
+  .copyright,
+  .notice {
+    font-size: 0.6rem;
+    line-height: 1rem;
   }
 }
