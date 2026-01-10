@@ -6,6 +6,7 @@ import KioskEventCard from '@/components/eventListPage/KioskEventCard';
 import Pagination from '@/components/eventListPage/Pagination';
 import FilterBar from '@/components/eventListPage/FilterBar';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
+import KioskFooter from '@/components/global/footer/KioskFooter';
 
 import { getEventList } from '@/api/eventList';
 
@@ -30,6 +31,20 @@ export default function KioskEventListPage() {
     축제: 'FESTIVAL',
     '교육/강좌': 'EDUEXP',
     기타: 'ETC',
+  };
+
+  const categories = ['전체', '공연', '전시', '축제', '교육/강좌', '기타'];
+
+  const handlePrevCategory = () => {
+    const idx = categories.indexOf(categoryLabel);
+    const prevIdx = (idx - 1 + categories.length) % categories.length;
+    handleFilterChange(categories[prevIdx]);
+  };
+
+  const handleNextCategory = () => {
+    const idx = categories.indexOf(categoryLabel);
+    const nextIdx = (idx + 1) % categories.length;
+    handleFilterChange(categories[nextIdx]);
   };
 
   const handleFilterChange = (label) => {
@@ -84,6 +99,9 @@ export default function KioskEventListPage() {
           selectedCategoryLabel={categoryLabel}
           onFilterChange={handleFilterChange}
           className={styles.kioskFilter}
+          showArrows
+          onPrev={handlePrevCategory}
+          onNext={handleNextCategory}
         />
 
         {loading && (
@@ -116,6 +134,7 @@ export default function KioskEventListPage() {
           </>
         )}
       </main>
+      <KioskFooter />
     </div>
   );
 }

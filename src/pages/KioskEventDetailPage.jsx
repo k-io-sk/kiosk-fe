@@ -7,6 +7,7 @@ import EventBasicInfo from '@/components/eventDetailPage/EventBasicInfo';
 import EventMap from '@/components/eventDetailPage/EventMap';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import NotFound from './NotFound';
+import KioskFooter from '@/components/global/footer/KioskFooter';
 
 import styles from './KioskEventDetailPage.module.css';
 import { getEventDetail } from '@/api/eventDetailAPI';
@@ -83,6 +84,7 @@ export default function KioskEventDetailPage() {
           </div>
         )}
       </main>
+      <KioskFooter />
     </div>
   );
 }

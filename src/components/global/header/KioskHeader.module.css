@@ -1,8 +1,8 @@
 .topHeader {
   width: 1820px;
-  height: 425px;
+  /* height: 425px; */
   background: #ffedc3;
-  padding: 60px 120px;
+  padding: 0 120px;
   box-sizing: border-box;
 
   display: flex;
@@ -10,7 +10,7 @@
   justify-content: flex-start;
 }
 
-.headerRow {
+/* .headerRow {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -18,7 +18,8 @@
 
 .logo {
   margin-top: 40px;
-  height: 80px;
+  margin-left: 60px;
+  height: 150px;
   width: auto;
 }
 
@@ -26,21 +27,22 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 16px;
+  gap: 5px;
+  margin-right: 80px;
 }
 
 .more {
-  margin: 0;
-  font-size: 40px;
+  margin-top: 40px;
+  font-size: 21px;
   font-weight: 600;
   color: #111;
-}
+} */
 
 .tabs {
-  margin-top: 80px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
-  gap: 220px;
+  gap: 70px;
 }
 
 .tab {
@@ -49,14 +51,23 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0 0 12px 0;
   color: #111;
-  width: 240px;
+  width: 440px;
+  height: 130px;
   text-align: center;
-  border-bottom: 12px solid transparent;
+  /* border: 3px solid #005278; */
+  border-radius: 34px 34px 0 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
+
+  position: relative;
+  text-decoration: none;
 }
 
 .activeTab {
-  border-bottom-color: #005278;
+  background: #ffffff;
+  color: #111;
 }
