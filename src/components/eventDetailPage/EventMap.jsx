@@ -24,7 +24,7 @@ export default function EventMap({ data, kiosk = false }) {
         markerTitle={title}
         markerInfo={address}
         onMarkerClick={handleMarkerClick}
-        height={kiosk ? 620 : 420}
+        height={kiosk ? 750 : 420}
         isKiosk={kiosk}
       />
     </section>
