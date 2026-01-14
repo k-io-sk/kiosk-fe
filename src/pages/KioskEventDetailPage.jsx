@@ -69,7 +69,7 @@ export default function KioskEventDetailPage() {
   }
   return (
     <div className={styles.page}>
-      <KioskHeader active='events' />
+      <KioskHeader active='jongno' />
 
       <main className={styles.content}>
         <button className={styles.backBtn} onClick={() => navigate(-1)}>

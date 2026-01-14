@@ -2,94 +2,90 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './KioskHeader.module.css';
 
+import UnavailableModal from '@global/modal/UnavailableModal';
+
 export default function KioskHeader({ active }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [promoOpen, setPromoOpen] = useState(false);
+  // 어떤 탭이 막혔는지 상태
+  const [blockedPage, setBlockedPage] = useState(null); // 'insadong' | 'promo' | null
+  const modalOpen = blockedPage !== null;
+
+  const modalTitle = useMemo(() => {
+    if (blockedPage === 'insadong') return '인사동 페이지는 준비 중입니다';
+    if (blockedPage === 'promo') return '프로모션 페이지는 준비 중입니다';
+    return '';
+  }, [blockedPage]);
 
   const resolvedActive = useMemo(() => {
     if (active) return active;
-
     if (pathname.startsWith('/kiosk/mbti')) return 'mbti';
-    if (pathname.startsWith('/kiosk/promo')) return 'promo';
-    if (pathname.startsWith('/kiosk/events')) return 'events';
-
-    return 'events';
+    if (pathname.startsWith('/kiosk/events')) return 'jongno';
+    return 'jongno';
   }, [active, pathname]);
 
+  // 모달 열리면 2초 후 종로구(/events)로 이동
   useEffect(() => {
-    if (!promoOpen) return;
+    if (!modalOpen) return;
 
     const timer = setTimeout(() => {
-      setPromoOpen(false);
-      if (pathname !== '/kiosk/events') navigate('/kiosk/events');
+      setBlockedPage(null);
+      navigate('/kiosk/events');
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [promoOpen, navigate, pathname]);
+  }, [modalOpen, navigate]);
 
-  const onClickTab = (path) => {
+  const go = (path) => {
     if (pathname !== path) navigate(path);
-  };
-
-  const onClickPromo = (e) => {
-    e.preventDefault();
-    setPromoOpen(true);
   };
 
   return (
     <header className={styles.topHeader}>
       <nav className={styles.tabs}>
+        {/* 종로구 */}
         <button
           type='button'
-          className={`${styles.tab} ${resolvedActive === 'events' ? styles.activeTab : ''}`}
-          onClick={() => onClickTab('/kiosk/events')}
+          className={`${styles.tab} ${resolvedActive === 'jongno' ? styles.activeTab : ''}`}
+          onClick={() => go('/kiosk/events')}
         >
-          오늘 행사
+          종로구
         </button>
 
+        {/* 인사동 (막힘) */}
+        <button type='button' className={styles.tab} onClick={() => setBlockedPage('insadong')}>
+          인사동
+        </button>
+
+        {/* MBTI */}
         <button
           type='button'
           className={`${styles.tab} ${resolvedActive === 'mbti' ? styles.activeTab : ''}`}
-          onClick={() => onClickTab('/kiosk/mbti')}
+          onClick={() => go('/kiosk/mbti')}
         >
-          MBTI 추천
+          MBTI
         </button>
 
-        <button
-          type='button'
-          className={`${styles.tab} ${resolvedActive === 'promo' ? styles.activeTab : ''}`}
-          onClick={onClickPromo}
-        >
+        {/* 프로모션 (막힘) */}
+        <button type='button' className={styles.tab} onClick={() => setBlockedPage('promo')}>
           프로모션
         </button>
       </nav>
 
-      {promoOpen && (
-        <div
-          className={styles.modalOverlay}
-          role='dialog'
-          aria-modal='true'
-          aria-label='프로모션 안내'
-          onClick={() => setPromoOpen(false)}
-        >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <p className={styles.modalTitle}>프로모션 페이지는 준비 중입니다.</p>
-
-            <button
-              type='button'
-              className={styles.modalBtn}
-              onClick={() => {
-                setPromoOpen(false);
-                navigate('/kiosk/events');
-              }}
-            >
-              확인
-            </button>
-          </div>
-        </div>
-      )}
+      <UnavailableModal
+        open={modalOpen}
+        title={modalTitle}
+        buttonText='확인'
+        onClose={() => setBlockedPage(null)}
+        onConfirm={() => {
+          setBlockedPage(null);
+          navigate('/kiosk/events');
+        }}
+        width='40rem'
+        height='20rem'
+        titleTop='6rem'
+      />
     </header>
   );
 }
