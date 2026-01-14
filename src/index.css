@@ -28,7 +28,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* 선택 사항 */
 
   /* Font */
-  --font-family: 'GowunBatang', sans-serif;
+  --font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 
   /* Grayscale */
   --gray-100: #ffffff;
