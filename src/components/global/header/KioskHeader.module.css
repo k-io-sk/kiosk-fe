@@ -1,7 +1,7 @@
 .topHeader {
   width: 1820px;
   /* height: 425px; */
-  background: #ffedc3;
+  background: transparent;
   padding: 0 120px;
   box-sizing: border-box;
 
@@ -10,53 +10,24 @@
   justify-content: flex-start;
 }
 
-/* .headerRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.logo {
-  margin-top: 40px;
-  margin-left: 60px;
-  height: 150px;
-  width: auto;
-}
-
-.moreBox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  margin-right: 80px;
-}
-
-.more {
-  margin-top: 40px;
-  font-size: 21px;
-  font-weight: 600;
-  color: #111;
-} */
-
 .tabs {
   margin-top: 60px;
   display: flex;
   justify-content: center;
-  gap: 70px;
+  gap: 40px;
 }
 
 .tab {
   font-size: 50px;
   font-weight: 700;
-  background: none;
+  background: #fff;
   border: none;
-  cursor: pointer;
   color: #111;
-  width: 440px;
+  width: 360px;
   height: 130px;
   text-align: center;
-  /* border: 3px solid #005278; */
-  border-radius: 34px 34px 0 0;
+  border: 3px solid #005278;
+  border-radius: 99px;
 
   display: flex;
   align-items: center;
@@ -68,6 +39,6 @@
 }
 
 .activeTab {
-  background: #FFFBF2;
-  color: #111;
+  background: #005278;
+  color: #fff;
 }
