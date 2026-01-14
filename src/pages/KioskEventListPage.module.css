@@ -1,7 +1,7 @@
 .page {
+  background-image: url('@assets/images/bgKiosk.png');
   width: 1820px;
   height: 2250px;
-  background: #ffffff;
   box-sizing: border-box;
   overflow: hidden;
 }

@@ -6,9 +6,9 @@
 }
 
 .page {
+  background-image: url('@assets/images/bgKiosk.png');
   width: 1820px;
   min-height: 2250px;
-  background: #fff;
   overflow: hidden;
 }
 
