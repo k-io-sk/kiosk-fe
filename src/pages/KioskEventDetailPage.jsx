@@ -73,7 +73,7 @@ export default function KioskEventDetailPage() {
 
       <main className={styles.content}>
         <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          <IoChevronBack size={32} />
+          <IoChevronBack size={55} />
           <span>목록으로</span>
         </button>
 
