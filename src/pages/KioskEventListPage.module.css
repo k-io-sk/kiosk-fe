@@ -60,13 +60,15 @@
 }
 
 .paginationWrap :global(button) {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  font-size: 30px;
+  font-size: 40px;
+  font-weight: 600;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  color: #111;
 }
 
 .paginationWrap :global(button[class*='active']) {
