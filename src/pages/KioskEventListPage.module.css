@@ -47,6 +47,7 @@
 }
 
 .grid {
+  height: 1374px;
   margin-top: 60px;
   display: grid;
   grid-template-columns: repeat(3, 400px);
@@ -124,7 +125,7 @@
 }
 
 .emptyWrapper {
-  height: calc(2250px - 580px);
+  height: 1374px;
   display: flex;
   flex-direction: column;
   justify-content: center;
