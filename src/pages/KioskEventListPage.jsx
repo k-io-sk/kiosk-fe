@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './KioskEventListPage.module.css';
 import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskEventCard from '@/components/eventListPage/KioskEventCard';
@@ -12,6 +12,13 @@ import { getEventList } from '@/api/eventList';
 
 export default function KioskEventListPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const regionParam = (searchParams.get('region') || 'jongno').toLowerCase();
+
+  const eventRegion = useMemo(() => {
+    return regionParam === 'insa' ? 'INSA' : 'JONGNO';
+  }, [regionParam]);
 
   const [page, setPage] = useState(1);
   const pageSize = 6;
@@ -28,12 +35,10 @@ export default function KioskEventListPage() {
     전체: 'ALL',
     공연: 'SHOW',
     전시: 'EXHIBITION',
-    축제: 'FESTIVAL',
-    '교육/강좌': 'EDUEXP',
     기타: 'ETC',
   };
 
-  const categories = ['전체', '공연', '전시', '축제', '교육/강좌', '기타'];
+  const categories = ['전체', '공연', '전시', '기타'];
 
   const handlePrevCategory = () => {
     const idx = categories.indexOf(categoryLabel);
@@ -53,6 +58,10 @@ export default function KioskEventListPage() {
   };
 
   useEffect(() => {
+    setPage(1);
+  }, [eventRegion]);
+
+  useEffect(() => {
     let mounted = true;
 
     (async () => {
@@ -61,6 +70,7 @@ export default function KioskEventListPage() {
         setErrorMsg('');
 
         const res = await getEventList({
+          eventRegion,
           eventCategory: categoryMap[categoryLabel] ?? 'ALL',
           pageNum: page,
           pageSize,
@@ -68,8 +78,7 @@ export default function KioskEventListPage() {
 
         if (!mounted) return;
 
-        const root = res?.data ? res.data : res;
-        const payload = root?.data ?? root ?? {};
+        const payload = res?.data ?? {};
         const nextEvents = Array.isArray(payload.content) ? payload.content : [];
 
         setEvents(nextEvents);
@@ -88,11 +97,11 @@ export default function KioskEventListPage() {
     return () => {
       mounted = false;
     };
-  }, [page, categoryLabel]);
+  }, [page, categoryLabel, eventRegion]);
 
   return (
     <div className={styles.page}>
-      <KioskHeader />
+      <KioskHeader active={eventRegion === 'INSA' ? 'insa' : 'jongno'} />
 
       <main className={styles.content}>
         <FilterBar

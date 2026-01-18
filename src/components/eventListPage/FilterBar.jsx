@@ -10,7 +10,7 @@ export default function FilterBar({
   onPrev,
   onNext,
 }) {
-  const categories = ['전체', '공연', '전시', '축제', '교육/강좌', '기타'];
+  const categories = ['전체', '공연', '전시', '기타'];
   const [selectedCategory, setSelectedCategory] = useState(selectedCategoryLabel);
 
   useEffect(() => setSelectedCategory(selectedCategoryLabel), [selectedCategoryLabel]);
