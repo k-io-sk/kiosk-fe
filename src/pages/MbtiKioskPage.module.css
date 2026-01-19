@@ -34,20 +34,57 @@
   display: grid;
   grid-template-columns: repeat(4, 250px);
   grid-auto-rows: 250px;
-  column-gap: 50px;
-  row-gap: 50px;
+  column-gap: 100px;
+  row-gap: 100px;
   justify-content: center;
 }
 
 .submitButton {
-  margin-top: 114px;
+  margin-top: 120px;
   width: 500px;
-  height: 100px;
-  border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.4);
-  background: #fffbf2;
-  font-size: 32px;
-  cursor: pointer;
+  height: 120px;
+  border-radius: 30px;
+  border: 5px solid #918b87;
+  background: #fff;
+
+  color: #69605c;
+  font-size: 50px;
+  font-weight: 600;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  transition: 0.05s ease-in-out;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.active {
+  border-color: #fe6c50;
+  color: #fe6c50;
+}
+
+.loading {
+  opacity: 0.5;
+}
+
+.btnSpinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid rgba(105, 96, 92, 0.35);
+  border-top-color: rgba(105, 96, 92, 0.9);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .resultSection {
