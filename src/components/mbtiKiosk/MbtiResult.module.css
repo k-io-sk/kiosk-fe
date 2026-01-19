@@ -1,13 +1,12 @@
 .resultWrap {
+  margin-top: 85px;
   position: relative;
-  margin: 100px auto;
-  max-width: 1540px;
-  width: 80%;
-  height: 750px;
-  border-radius: 20px;
+  width: 1755px;
+  height: 970px;
+  border-radius: 23px;
   border: 3px solid #f8ecde;
-  background: #fff;
-  padding: 24px 40px 32px;
+  background: #fffdfa;
+  padding: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,13 +15,32 @@
 .noticeRow {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
   gap: 40px;
-  margin-top: 16px;
 }
 
-.topLeftQr {
-  position: absolute;
+.topQrBtn {
+  border: none;
+}
+
+.topQrBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.noticeText {
+  margin: 0;
+  color: #fe6c50;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+.arrow {
+  margin-right: 18px;
+  display: inline-block;
 }
 
 .notice {
@@ -38,10 +56,10 @@
 
 .cardsRow {
   display: flex;
-  gap: 20px;
+  gap: 160px;
   justify-content: center;
   width: 100%;
-  margin: 24px 0;
+  margin: 40px 0;
 }
 
 .card {
@@ -51,10 +69,10 @@
 }
 
 .thumbnail {
-  width: 320px;
-  height: 450px;
+  width: 440px;
+  aspect-ratio: 3 / 4;
   background: #f1e9dd;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -68,7 +86,8 @@
 .cardTitle {
   width: 500px;
   margin-top: 12px;
-  font-size: 30px;
+  font-size: 40px;
+  font-weight: 700;
   text-align: center;
 
   line-height: 1.35;
