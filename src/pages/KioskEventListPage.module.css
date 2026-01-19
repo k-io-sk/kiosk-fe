@@ -24,8 +24,16 @@
 .content {
   padding: 0 120px;
   box-sizing: border-box;
-  margin-top: 70px;
-  height: 1850px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
 }
 
 .spinnerWrapper {
@@ -48,8 +56,16 @@
 }
 
 .paginationWrap .kioskPagination {
+  margin: 0;
   margin: 40px;
   gap: 40px;
+}
+
+.paginationWrap {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding: 0 0 24px;
 }
 
 .paginationWrap :global(button) {
