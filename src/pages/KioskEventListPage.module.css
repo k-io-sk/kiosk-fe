@@ -126,3 +126,8 @@
   line-height: 2.5;
   text-align: center;
 }
+
+.errorText {
+  font-size: 45px;
+  font-weight: 600;
+}
