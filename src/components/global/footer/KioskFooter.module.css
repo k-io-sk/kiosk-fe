@@ -1,32 +1,34 @@
 .footer {
   width: 100%;
   box-sizing: border-box;
-
   padding: 0 100px;
 }
 
 .inner {
   display: flex;
   align-items: center;
-
   justify-content: flex-end;
-  gap: 10px;
+  gap: 20px;
 }
 
 .text {
   margin: 0;
-  font-size: 34px;
-  font-weight: 700;
-  color: #111;
-  line-height: 1.4;
-  word-break: keep-all;
   text-align: right;
+  color: #fe6c50;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.3;
+  word-break: keep-all;
+}
+
+.qrBtn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
 }
 
 .qr {
-  width: 140px;
-  height: 140px;
-
   display: flex;
   align-items: center;
   justify-content: center;
