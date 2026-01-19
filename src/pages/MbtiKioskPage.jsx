@@ -109,7 +109,7 @@ const MbtiKioskPage = () => {
     description: '',
     eventId: item.eventId,
     imageUrl: item.mainImage,
-    qrUrl: item.eventId ? `${base}/mbti/result?eventIds=${item.eventId}` : null,
+    qrUrl: item.eventId ? `${base}/mbti/result?eventIds=${item.eventId}` : null, 
   }));
 
   const topQrUrl = useMemo(() => {
@@ -184,6 +184,7 @@ const MbtiKioskPage = () => {
               {error && (
                 <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>추천 결과를 불러오지 못했어요</div>
               )}
+
               {!isLoading && !error && (
                 <MbtiResult
                   resultList={resultList}
