@@ -1,10 +1,6 @@
 .page {
   width: 100%;
   min-height: 100vh;
-  background-image: url('@assets/images/bgKiosk.png');
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -12,8 +8,8 @@
 
 .kiosk {
   width: 1820px;
-  height: 2250px;
   min-height: 2250px;
+  margin: 0 auto;
   overflow: hidden;
 }
 
