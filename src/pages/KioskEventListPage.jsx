@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './KioskEventListPage.module.css';
-import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskEventCard from '@/components/eventListPage/KioskEventCard';
 import Pagination from '@/components/eventListPage/Pagination';
 import FilterBar from '@/components/eventListPage/FilterBar';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
-import KioskFooter from '@/components/global/footer/KioskFooter';
 import { getEventList } from '@/api/eventList';
 
 export default function KioskEventListPage() {
@@ -128,8 +126,7 @@ export default function KioskEventListPage() {
 
   return (
     <div className={styles.page}>
-      <KioskHeader active={eventRegion === 'INSA' ? 'insa' : 'jongno'} />
-
+      {' '}
       <main className={styles.content}>
         <FilterBar
           selectedCategoryLabel={categoryLabel}
@@ -163,12 +160,16 @@ export default function KioskEventListPage() {
             </section>
 
             <div className={styles.paginationWrap}>
-              <Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />
+              <Pagination
+                totalPages={totalPages}
+                currentPage={page}
+                onPageChange={handlePageChange}
+                className={styles.kioskPagination}
+              />{' '}
             </div>
           </>
         )}
       </main>
-      <KioskFooter />
     </div>
   );
 }

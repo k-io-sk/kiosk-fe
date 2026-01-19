@@ -5,13 +5,6 @@
   overflow: hidden;
 }
 
-.page {
-  background-image: url('@assets/images/bgKiosk.png');
-  width: 1820px;
-  min-height: 2250px;
-  overflow: hidden;
-}
-
 .content {
   padding: 0;
 }

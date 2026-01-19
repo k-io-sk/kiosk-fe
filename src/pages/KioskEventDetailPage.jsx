@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoChevronBack } from 'react-icons/io5';
-
-import KioskHeader from '@/components/global/header/KioskHeader';
 import EventBasicInfo from '@/components/eventDetailPage/EventBasicInfo';
 import EventMap from '@/components/eventDetailPage/EventMap';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import NotFound from './NotFound';
-import KioskFooter from '@/components/global/footer/KioskFooter';
 
 import styles from './KioskEventDetailPage.module.css';
 import { getEventDetail } from '@/api/eventDetailAPI';
@@ -69,8 +66,6 @@ export default function KioskEventDetailPage() {
   }
   return (
     <div className={styles.page}>
-      <KioskHeader active='jongno' />
-
       <main className={styles.content}>
         <button className={styles.backBtn} onClick={() => navigate(-1)}>
           <IoChevronBack size={55} />
@@ -84,7 +79,6 @@ export default function KioskEventDetailPage() {
           </div>
         )}
       </main>
-      <KioskFooter />
     </div>
   );
 }

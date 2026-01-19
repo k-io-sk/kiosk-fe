@@ -1,11 +1,3 @@
-.page {
-  background-image: url('@assets/images/bgKiosk.png');
-  width: 1820px;
-  height: 2250px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
 .tabs {
   margin-top: 80px;
   display: flex;
@@ -55,8 +47,9 @@
   row-gap: 40px;
 }
 
-.paginationWrap {
-  margin-top: 70px;
+.paginationWrap .kioskPagination {
+  margin: 40px;
+  gap: 40px;
 }
 
 .paginationWrap :global(button) {
@@ -72,7 +65,7 @@
 }
 
 .paginationWrap :global(button[class*='active']) {
-  background-color: #FE6C50;
+  background-color: #fe6c50;
 }
 
 .kioskFilter {
@@ -122,13 +115,13 @@
 }
 
 .emptyWrapper {
-  height: 1374px;
+  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 500;
   line-height: 2.5;
   text-align: center;
