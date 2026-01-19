@@ -140,7 +140,6 @@ export default function KioskEventListPage() {
           </div>
         )}
 
-
         {!loading && errorMsg && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{errorMsg}</div>}
         {!loading && !errorMsg && events.length === 0 && (
           <div className={styles.emptyWrapper}>
