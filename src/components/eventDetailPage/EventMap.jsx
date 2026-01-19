@@ -1,5 +1,6 @@
 import KakaoMap from './KakaoMap';
 import styles from './EventMap.module.css';
+import { FiMapPin } from 'react-icons/fi';
 
 export default function EventMap({ data, kiosk = false }) {
   const { latitude, longitude, title, address } = data?.data ?? data ?? {};
@@ -13,18 +14,26 @@ export default function EventMap({ data, kiosk = false }) {
   return (
     <section className={`${styles.wrap} ${kiosk ? styles.kioskWrap : ''}`}>
       <div className={styles.headerRow}>
-        <h3 className={`${styles.title} ${kiosk ? styles.kioskTitle : ''}`}>오시는 길 안내</h3>
+        <h3 className={`${styles.title} ${kiosk ? styles.kioskTitle : ''}`}>
+          {kiosk && (
+            <span className={styles.kioskIconWrap} aria-hidden='true'>
+              <FiMapPin className={styles.kioskIcon} />
+            </span>
+          )}
+          오시는 길 안내
+        </h3>
       </div>
 
       {address && <p className={`${styles.note} ${kiosk ? styles.kioskNote : ''}`}>{address}</p>}
 
       <KakaoMap
+        className={`${styles.map} ${kiosk ? styles.kioskMap : ''}`}
         latitude={latitude}
         longitude={longitude}
         markerTitle={title}
         markerInfo={address}
         onMarkerClick={handleMarkerClick}
-        height={kiosk ? 750 : 420}
+        height={kiosk ? 700 : 420}
         isKiosk={kiosk}
       />
     </section>
