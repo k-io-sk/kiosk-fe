@@ -176,3 +176,8 @@
     min-height: 180px;
   }
 }
+
+.errorText {
+  font-size: 45px;
+  font-weight: 600;
+}

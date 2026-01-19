@@ -177,11 +177,13 @@ const MbtiKioskPage = () => {
             <div className={styles.resultSection}>
               {isLoading && (
                 <div className={styles.spinnerWrapper}>
-                  <LoadingSpinner size={56} />
+                  <LoadingSpinner size={100} />
                 </div>
               )}
 
-              {error && <div className={styles.spinnerWrapper}>추천 결과를 불러오지 못했어요</div>}
+              {error && (
+                <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>추천 결과를 불러오지 못했어요</div>
+              )}
 
               {!isLoading && !error && (
                 <MbtiResult
