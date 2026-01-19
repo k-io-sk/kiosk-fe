@@ -1,5 +1,24 @@
-.kioskLayout {
+.shell {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background-image: url('@assets/images/bgKiosk.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+.header,
+.footer {
+  flex: 0 0 auto;
+}
+
+.main {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
 }

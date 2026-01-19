@@ -1,6 +1,6 @@
 import styles from './Pagination.module.css';
 
-export default function Pagination({ totalPages, currentPage, onPageChange }) {
+export default function Pagination({ totalPages, currentPage, onPageChange, className = '' }) {
   if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
@@ -26,7 +26,7 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
   };
 
   return (
-    <div className={styles.pagination}>
+    <div className={`${styles.pagination} ${className}`}>
       <button className={styles.pageArrow} onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
         {'<'}
       </button>

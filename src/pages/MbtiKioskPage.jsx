@@ -5,8 +5,6 @@ import MbtiResult from '../components/mbtiKiosk/MbtiResult';
 import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
-import KioskHeader from '@/components/global/header/KioskHeader';
-import KioskFooter from '@/components/global/footer/KioskFooter';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
@@ -125,8 +123,6 @@ const MbtiKioskPage = () => {
 
   return (
     <div className={`${styles.page} ${!isMobile ? styles.kiosk : ''}`}>
-      <KioskHeader />
-
       <main className={styles.main}>
         <section className={styles.content}>
           <div className={styles.mbtiGrid}>
@@ -169,7 +165,6 @@ const MbtiKioskPage = () => {
           )}
         </section>
       </main>
-      <KioskFooter />
     </div>
   );
 };
