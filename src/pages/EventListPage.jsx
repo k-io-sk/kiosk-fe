@@ -10,13 +10,13 @@ import PageLoader from '@components/global/pageLoader/PageLoader';
 export default function EventListPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const presetCategory = location.state?.presetCategory || 'ALL';
+
   const presetKeyword = location.state?.keyword || '';
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const categoryFromURL = searchParams.get('category') || location.state?.presetCategory || 'ALL';
-  const keywordFromURL = searchParams.get('q') || location.state?.keyword || '';
+  const categoryFromURL = searchParams.get('category') || 'ALL';
+  const keywordFromURL = searchParams.get('q') || '';
   const pageFromURL = Number(searchParams.get('page') || 1);
 
   const [currentPage, setCurrentPage] = useState(pageFromURL);
@@ -35,8 +35,6 @@ export default function EventListPage() {
     전체: 'ALL',
     공연: 'SHOW',
     전시: 'EXHIBITION',
-    축제: 'FESTIVAL',
-    '교육/강좌': 'EDUEXP',
     기타: 'ETC',
   };
 
@@ -44,12 +42,11 @@ export default function EventListPage() {
     ALL: '전체',
     SHOW: '공연',
     EXHIBITION: '전시',
-    FESTIVAL: '축제',
-    EDUEXP: '교육/강좌',
     ETC: '기타',
   };
 
   const { events, totalPages, loading } = useEventList({
+    eventRegion: 'JONGNO',
     category: selectedCategory,
     page: currentPage,
     size: pageSize,
@@ -62,22 +59,24 @@ export default function EventListPage() {
   });
 
   useEffect(() => {
-    if (presetKeyword !== keyword) {
+    if (presetKeyword && presetKeyword !== keyword) {
       setKeyword(presetKeyword);
       setCurrentPage(1);
+
+      const params = { category: selectedCategory, page: '1', q: presetKeyword };
+      setSearchParams(params, { replace: false });
     }
   }, [presetKeyword]);
 
   const syncURL = (next) => {
-    // next: { category, q, page }
-    setSearchParams(
-      {
-        category: next.category ?? selectedCategory,
-        q: next.q ?? keyword,
-        page: String(next.page ?? currentPage),
-      },
-      { replace: false },
-    );
+    const nextCategory = next.category ?? selectedCategory;
+    const nextQ = next.q ?? keyword;
+    const nextPage = String(next.page ?? currentPage);
+
+    const params = { category: nextCategory, page: nextPage };
+    if (nextQ) params.q = nextQ;
+
+    setSearchParams(params, { replace: false });
   };
 
   const handlePageChange = (page) => {
@@ -99,12 +98,17 @@ export default function EventListPage() {
     <div className={styles.page}>
       {isMobileDevice() && <EventRecommend events={recommendEvents} />}
 
-      <FilterBar onFilterChange={handleFilterChange} selectedCategoryLabel={reverseCategoryMap[selectedCategory]} />
+      <FilterBar
+        onFilterChange={handleFilterChange}
+        selectedCategoryLabel={reverseCategoryMap[selectedCategory]}
+        categories={['전체', '공연', '전시', '기타']}
+      />
+
       <div className={styles.container}>
         <div className={styles.grid}>
           {events.map((event, index) => (
             <div
-              key={event.id || index}
+              key={event.eventId ?? event.id ?? index}
               onClick={() => navigate(`/events/${event.eventId}`)}
               style={{ cursor: 'pointer' }}
             >

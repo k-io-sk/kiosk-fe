@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import styles from './KioskHeader.module.css';
 
 import UnavailableModal from '@global/modal/UnavailableModal';
@@ -7,35 +7,41 @@ import UnavailableModal from '@global/modal/UnavailableModal';
 export default function KioskHeader({ active }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // 어떤 탭이 막혔는지 상태
-  const [blockedPage, setBlockedPage] = useState(null); // 'insadong' | 'promo' | null
+  const [blockedPage, setBlockedPage] = useState(null);
   const modalOpen = blockedPage !== null;
 
   const modalTitle = useMemo(() => {
-    if (blockedPage === 'insadong') return '인사동 페이지는 준비 중입니다';
     if (blockedPage === 'promo') return '프로모션 페이지는 준비 중입니다';
     return '';
   }, [blockedPage]);
 
+  const regionParam = searchParams.get('region') || 'jongno';
+
   const resolvedActive = useMemo(() => {
     if (active) return active;
     if (pathname.startsWith('/kiosk/mbti')) return 'mbti';
-    if (pathname.startsWith('/kiosk/events')) return 'jongno';
+    if (regionParam === 'insa') return 'insa';
     return 'jongno';
-  }, [active, pathname]);
+  }, [active, pathname, regionParam]);
 
-  // 모달 열리면 2초 후 종로구(/events)로 이동
   useEffect(() => {
     if (!modalOpen) return;
 
     const timer = setTimeout(() => {
       setBlockedPage(null);
-      navigate('/kiosk/events');
+      setSearchParams({ region: 'jongno' });
+      navigate('/kiosk/events?region=jongno');
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [modalOpen, navigate]);
+  }, [modalOpen, navigate, setSearchParams]);
+
+  const goRegion = (region) => {
+    setSearchParams({ region });
+    navigate(`/kiosk/events?region=${region}`);
+  };
 
   const go = (path) => {
     if (pathname !== path) navigate(path);
@@ -44,21 +50,22 @@ export default function KioskHeader({ active }) {
   return (
     <header className={styles.topHeader}>
       <nav className={styles.tabs}>
-        {/* 종로구 */}
         <button
           type='button'
           className={`${styles.tab} ${resolvedActive === 'jongno' ? styles.activeTab : ''}`}
-          onClick={() => go('/kiosk/events')}
+          onClick={() => goRegion('jongno')}
         >
           종로구
         </button>
 
-        {/* 인사동 (막힘) */}
-        <button type='button' className={styles.tab} onClick={() => setBlockedPage('insadong')}>
+        <button
+          type='button'
+          className={`${styles.tab} ${resolvedActive === 'insa' ? styles.activeTab : ''}`}
+          onClick={() => goRegion('insa')}
+        >
           인사동
         </button>
 
-        {/* MBTI */}
         <button
           type='button'
           className={`${styles.tab} ${resolvedActive === 'mbti' ? styles.activeTab : ''}`}
@@ -67,7 +74,6 @@ export default function KioskHeader({ active }) {
           MBTI
         </button>
 
-        {/* 프로모션 (막힘) */}
         <button type='button' className={styles.tab} onClick={() => setBlockedPage('promo')}>
           프로모션
         </button>
@@ -80,7 +86,8 @@ export default function KioskHeader({ active }) {
         onClose={() => setBlockedPage(null)}
         onConfirm={() => {
           setBlockedPage(null);
-          navigate('/kiosk/events');
+          setSearchParams({ region: 'jongno' });
+          navigate('/kiosk/events?region=jongno');
         }}
         width='40rem'
         height='20rem'

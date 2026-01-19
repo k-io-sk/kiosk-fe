@@ -5,8 +5,7 @@ import MbtiResult from '../components/mbtiKiosk/MbtiResult';
 import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
-import KioskHeader from '@/components/global/header/KioskHeader';
-import KioskFooter from '@/components/global/footer/KioskFooter';
+import { useKioskUI } from '@/contexts/KioskUIContext';
 
 const LIST_URL = 'https://skukiosk.netlify.app/events';
 
@@ -103,11 +102,14 @@ const MbtiKioskPage = () => {
 
   const handleBack = () => setShowResult(false);
 
+  const base = window.location.origin;
+
   const resultList = (recommendEvents || []).map((item) => ({
     title: item.title,
     description: '',
     eventId: item.eventId,
     imageUrl: item.mainImage,
+    qrUrl: item.eventId ? `${base}/mbti/result?eventIds=${item.eventId}` : null, 
   }));
 
   const topQrUrl = useMemo(() => {
@@ -123,10 +125,24 @@ const MbtiKioskPage = () => {
     return `${base}/mbti/result?${query}`;
   }, [resultList]);
 
+  const isReady = Boolean(mbti);
+  const isLoading = loading;
+
+  const buttonText = useMemo(() => {
+    if (isLoading) return '결과 로딩중..';
+    return '추천 결과 보기';
+  }, [isLoading]);
+
+  const { setHideFooter } = useKioskUI();
+
+  useEffect(() => {
+    setHideFooter(showResult);
+
+    return () => setHideFooter(false);
+  }, [showResult, setHideFooter]);
+
   return (
     <div className={`${styles.page} ${!isMobile ? styles.kiosk : ''}`}>
-      <KioskHeader />
-
       <main className={styles.main}>
         <section className={styles.content}>
           <div className={styles.mbtiGrid}>
@@ -141,15 +157,25 @@ const MbtiKioskPage = () => {
             ))}
           </div>
 
-          <button className={styles.submitButton} onClick={handleSubmit} disabled={!mbti || loading}>
-            {loading ? '결과 불러오는 중...' : '추천 결과 보기'}
+          <button
+            className={[
+              styles.submitButton,
+              !isReady ? styles.disabled : '',
+              showResult && !isLoading ? styles.active : '',
+              isLoading ? styles.loading : '',
+            ].join(' ')}
+            onClick={handleSubmit}
+            disabled={!isReady || isLoading}
+          >
+            {isLoading && <span className={styles.btnSpinner} aria-hidden='true' />}
+            {buttonText}
           </button>
 
           {!showResult && <MbtiInfoText />}
 
           {showResult && (
             <div className={styles.resultSection}>
-              {loading && (
+              {isLoading && (
                 <div className={styles.spinnerWrapper}>
                   <LoadingSpinner size={56} />
                 </div>
@@ -157,7 +183,7 @@ const MbtiKioskPage = () => {
 
               {error && <div className={styles.spinnerWrapper}>추천 결과를 불러오지 못했어요</div>}
 
-              {!loading && !error && (
+              {!isLoading && !error && (
                 <MbtiResult
                   resultList={resultList}
                   topQrUrl={topQrUrl}
@@ -169,7 +195,6 @@ const MbtiKioskPage = () => {
           )}
         </section>
       </main>
-      <KioskFooter />
     </div>
   );
 };

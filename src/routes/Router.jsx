@@ -23,7 +23,6 @@ export default function AppRouter() {
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          {/* PC */}
           <Route path='/' element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path='events' element={<EventListPage />} />
@@ -42,7 +41,6 @@ export default function AppRouter() {
             <Route path='*' element={<NotFoundPage />} />
           </Route>
 
-          {/* Kiosk */}
           <Route
             path='/kiosk'
             element={

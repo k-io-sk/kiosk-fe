@@ -14,20 +14,21 @@
   margin-top: 60px;
   display: flex;
   justify-content: center;
-  gap: 40px;
+  align-items: center;
+  gap: 60px;
 }
 
 .tab {
-  font-size: 50px;
+  font-size: 58px;
   font-weight: 700;
   background: #fff;
   border: none;
-  color: #111;
+  color: #69605c;
   width: 360px;
   height: 130px;
   text-align: center;
-  border: 3px solid #005278;
-  border-radius: 99px;
+  border: 4.972px solid #918b87;
+  border-radius: 40px;
 
   display: flex;
   align-items: center;
@@ -39,6 +40,8 @@
 }
 
 .activeTab {
-  background: #005278;
+  background: #fe6c50;
+  border: 3px solid #fe6c50;
+
   color: #fff;
 }

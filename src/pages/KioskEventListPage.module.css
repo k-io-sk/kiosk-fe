@@ -1,11 +1,3 @@
-.page {
-  background-image: url('@assets/images/bgKiosk.png');
-  width: 1820px;
-  height: 2250px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
 .tabs {
   margin-top: 80px;
   display: flex;
@@ -47,24 +39,25 @@
 }
 
 .grid {
-  margin-top: 60px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 400px);
   justify-content: center;
   column-gap: 130px;
-  row-gap: 70px;
+  row-gap: 40px;
 }
 
-.paginationWrap {
-  margin-top: 70px;
+.paginationWrap .kioskPagination {
+  margin: 40px;
+  gap: 40px;
 }
 
 .paginationWrap :global(button) {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 45px;
+  font-weight: 700;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +65,7 @@
 }
 
 .paginationWrap :global(button[class*='active']) {
-  background-color: #005278;
+  background-color: #fe6c50;
 }
 
 .kioskFilter {
@@ -89,16 +82,12 @@
   gap: 60px;
   padding: 14px 26px;
 
-  border: 3px solid #d9d9d9;
-  border-radius: 999px;
-  background: #fff;
-
   list-style: none;
   margin: 0;
 }
 
 .kioskFilter :global(li) {
-  font-size: 35px;
+  font-size: 45px;
   font-weight: 700;
 
   color: #111;
@@ -109,8 +98,10 @@
 }
 
 .kioskFilter :global(li[class*='active']) {
-  background: #005278;
+  width: 135px;
+  background: #fe6c50;
   color: #fff;
+  border-bottom: none;
 }
 
 .emptyText {
@@ -124,14 +115,19 @@
 }
 
 .emptyWrapper {
-  height: calc(2250px - 580px);
+  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 500;
   line-height: 2.5;
   text-align: center;
+}
+
+.errorText {
+  font-size: 45px;
+  font-weight: 600;
 }

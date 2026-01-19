@@ -1,0 +1,98 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 1035px;
+  height: 1035px;
+  border-radius: 50px;
+  border: 1px solid #e7e7e7;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.close {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  border: none;
+  background: transparent;
+  font-size: 80px;
+  color: #737373;
+  cursor: pointer;
+}
+
+.qrWrapper {
+  position: relative;
+  width: 600px;
+  height: 600px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 15px solid #fe6c50;
+}
+
+/* 모서리 위치 */
+.tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* 안내 문구 */
+.text {
+  margin: 0;
+  color: #fe6c50;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 55px;
+  font-weight: 700;
+}

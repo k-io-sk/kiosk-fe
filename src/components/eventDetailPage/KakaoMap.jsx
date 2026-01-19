@@ -35,11 +35,23 @@ export default function KakaoMap({
         marker.setMap(map);
 
         if (markerTitle || markerInfo) {
+          const fontSize = isKiosk ? 40 : 13;
+          const padY = isKiosk ? 24 : 8;
+          const padX = isKiosk ? 28 : 12;
+          const lineHeight = isKiosk ? 1.25 : 1.3;
+
           const content = `
-            <div style="padding:8px 12px;font-size:13px;">
-              ${markerTitle ? `<strong>${markerTitle}</strong><br/>` : ''}
-              ${markerInfo}
-            </div>`;
+            <div style="
+              padding:${padY}px ${padX}px;
+              font-size:${fontSize}px;
+              line-height:${lineHeight};
+              white-space:nowrap;
+            ">
+              ${markerTitle ? `<strong style="font-size:${fontSize}px;">${markerTitle}</strong><br/>` : ''}
+              ${markerInfo ? `<span style="font-size:${fontSize}px;">${markerInfo}</span>` : ''}
+            </div>
+          `;
+
           const infoWindow = new kakao.maps.InfoWindow({ content });
           infoWindow.open(map, marker);
         }
@@ -48,7 +60,6 @@ export default function KakaoMap({
           kakao.maps.event.addListener(marker, 'click', onMarkerClick);
         }
 
-        // 지연 보정
         setTimeout(() => {
           map.relayout();
           map.setCenter(center);
@@ -56,27 +67,25 @@ export default function KakaoMap({
       });
     };
 
-    // SDK 로드
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script');
       script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.VITE_KAKAO_MAP_KEY}&autoload=false`;
-      script.onload = () => {
-        init();
-      };
+      script.onload = init;
       script.onerror = () => console.error('Kakao SDK script 로드 실패');
       document.head.appendChild(script);
     } else {
       init();
     }
 
-    // 윈도우 리사이즈
     const handleResize = () => {
       if (mapObjRef.current && centerRef.current) {
         mapObjRef.current.relayout();
         mapObjRef.current.setCenter(centerRef.current);
-        mapObjRef.current.setLevel(isKiosk ? 2 : 3);
+
+        mapObjRef.current.setLevel(isKiosk ? 1 : 3);
       }
     };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [latitude, longitude, markerTitle, markerInfo, onMarkerClick, isKiosk]);
@@ -88,7 +97,6 @@ export default function KakaoMap({
         width: '100%',
         margin: '0 auto',
         height: `${height}px`,
-        borderRadius: '8px',
         overflow: 'hidden',
         background: '#f5f5f5',
       }}

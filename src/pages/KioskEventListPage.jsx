@@ -1,55 +1,91 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './KioskEventListPage.module.css';
-import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskEventCard from '@/components/eventListPage/KioskEventCard';
 import Pagination from '@/components/eventListPage/Pagination';
 import FilterBar from '@/components/eventListPage/FilterBar';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
-import KioskFooter from '@/components/global/footer/KioskFooter';
-
 import { getEventList } from '@/api/eventList';
 
 export default function KioskEventListPage() {
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [page, setPage] = useState(1);
-  const pageSize = 6;
+  useEffect(() => {
+    const region = searchParams.get('region');
+    const category = searchParams.get('category');
+    const page = searchParams.get('page');
 
-  const [events, setEvents] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
+    if (!region || !category || !page) {
+      setSearchParams(
+        {
+          region: region ?? 'jongno',
+          category: category ?? 'ALL',
+          page: page ?? '1',
+        },
+        { replace: true },
+      );
+    }
+  }, [searchParams, setSearchParams]);
 
-  const [loading, setLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState('');
+  const regionParam = (searchParams.get('region') || 'jongno').toLowerCase();
+  const eventRegion = useMemo(() => (regionParam === 'insa' ? 'INSA' : 'JONGNO'), [regionParam]);
 
-  const [categoryLabel, setCategoryLabel] = useState('전체');
+  const categoryFromURL = (searchParams.get('category') || 'ALL').toUpperCase();
+  const pageFromURL = Number(searchParams.get('page') || 1);
+
+  const reverseCategoryMap = {
+    ALL: '전체',
+    SHOW: '공연',
+    EXHIBITION: '전시',
+    ETC: '기타',
+  };
 
   const categoryMap = {
     전체: 'ALL',
     공연: 'SHOW',
     전시: 'EXHIBITION',
-    축제: 'FESTIVAL',
-    '교육/강좌': 'EDUEXP',
     기타: 'ETC',
   };
 
-  const categories = ['전체', '공연', '전시', '축제', '교육/강좌', '기타'];
+  const [categoryLabel, setCategoryLabel] = useState(reverseCategoryMap[categoryFromURL] ?? '전체');
+  const [page, setPage] = useState(pageFromURL);
 
-  const handlePrevCategory = () => {
-    const idx = categories.indexOf(categoryLabel);
-    const prevIdx = (idx - 1 + categories.length) % categories.length;
-    handleFilterChange(categories[prevIdx]);
-  };
+  const pageSize = 6;
 
-  const handleNextCategory = () => {
-    const idx = categories.indexOf(categoryLabel);
-    const nextIdx = (idx + 1) % categories.length;
-    handleFilterChange(categories[nextIdx]);
+  const [events, setEvents] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    setCategoryLabel(reverseCategoryMap[categoryFromURL] ?? '전체');
+    setPage(pageFromURL);
+  }, [categoryFromURL, pageFromURL, eventRegion]);
+
+  const syncURL = (next) => {
+    const nextCategory = (next.category ?? categoryFromURL).toUpperCase();
+    const nextPage = String(next.page ?? page);
+
+    setSearchParams(
+      {
+        region: regionParam,
+        category: nextCategory,
+        page: nextPage,
+      },
+      { replace: false },
+    );
   };
 
   const handleFilterChange = (label) => {
+    const mapped = categoryMap[label] ?? 'ALL';
     setCategoryLabel(label);
     setPage(1);
+    syncURL({ category: mapped, page: 1 });
+  };
+
+  const handlePageChange = (nextPage) => {
+    setPage(nextPage);
+    syncURL({ page: nextPage });
   };
 
   useEffect(() => {
@@ -61,18 +97,16 @@ export default function KioskEventListPage() {
         setErrorMsg('');
 
         const res = await getEventList({
-          eventCategory: categoryMap[categoryLabel] ?? 'ALL',
+          eventRegion,
+          eventCategory: categoryFromURL,
           pageNum: page,
           pageSize,
         });
 
         if (!mounted) return;
 
-        const root = res?.data ? res.data : res;
-        const payload = root?.data ?? root ?? {};
-        const nextEvents = Array.isArray(payload.content) ? payload.content : [];
-
-        setEvents(nextEvents);
+        const payload = res?.data ?? {};
+        setEvents(Array.isArray(payload.content) ? payload.content : []);
         setTotalPages(Number(payload.totalPages) || 1);
       } catch (e) {
         if (!mounted) return;
@@ -88,20 +122,17 @@ export default function KioskEventListPage() {
     return () => {
       mounted = false;
     };
-  }, [page, categoryLabel]);
+  }, [eventRegion, categoryFromURL, page]);
 
   return (
     <div className={styles.page}>
-      <KioskHeader />
-
+      {' '}
       <main className={styles.content}>
         <FilterBar
           selectedCategoryLabel={categoryLabel}
           onFilterChange={handleFilterChange}
           className={styles.kioskFilter}
-          showArrows
-          onPrev={handlePrevCategory}
-          onNext={handleNextCategory}
+          categories={['전체', '공연', '전시', '기타']}
         />
 
         {loading && (
@@ -110,8 +141,7 @@ export default function KioskEventListPage() {
           </div>
         )}
 
-        {!loading && errorMsg && <div className={styles.spinnerWrapper}>{errorMsg}</div>}
-
+        {!loading && errorMsg && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{errorMsg}</div>}
         {!loading && !errorMsg && events.length === 0 && (
           <div className={styles.emptyWrapper}>
             해당 카테고리에 등록된 행사가 없습니다.
@@ -129,12 +159,16 @@ export default function KioskEventListPage() {
             </section>
 
             <div className={styles.paginationWrap}>
-              <Pagination totalPages={totalPages} currentPage={page} onPageChange={setPage} />
+              <Pagination
+                totalPages={totalPages}
+                currentPage={page}
+                onPageChange={handlePageChange}
+                className={styles.kioskPagination}
+              />{' '}
             </div>
           </>
         )}
       </main>
-      <KioskFooter />
     </div>
   );
 }

@@ -12,7 +12,9 @@ export default function KioskEventCard({ event }) {
 
   return (
     <div className={styles.card} onClick={handleClick} role='button' tabIndex={0}>
-      <img src={mainImage} alt={title} className={styles.img} />
+      <div className={styles.thumb}>
+        <img src={mainImage} alt={title} className={styles.img} />
+      </div>
       <p className={styles.title}>{title}</p>
       <p className={styles.place}>{location}</p>
     </div>

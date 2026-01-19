@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getEventList } from '@api/eventList';
 
-export function useEventList({ category, period = 'ALL', page, size, keyword = '' }) {
+export function useEventList({ eventRegion = 'JONGNO', category, period = 'ALL', page, size, keyword = '' }) {
   const [events, setEvents] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -16,8 +16,8 @@ export function useEventList({ category, period = 'ALL', page, size, keyword = '
         setError(null);
 
         const res = await getEventList({
+          eventRegion,
           eventCategory: category,
-          eventPeriod: period,
           keyword,
           pageNum: page,
           pageSize: size,
@@ -25,9 +25,9 @@ export function useEventList({ category, period = 'ALL', page, size, keyword = '
 
         if (!mounted) return;
 
-        const data = res || {};
-        setEvents(data.content || []);
-        setTotalPages(data.totalPages || 1);
+        const payload = res?.data ?? res ?? {};
+        setEvents(Array.isArray(payload.content) ? payload.content : []);
+        setTotalPages(Number(payload.totalPages) || 1);
       } catch (e) {
         if (!mounted) return;
         setError(e);
@@ -43,7 +43,7 @@ export function useEventList({ category, period = 'ALL', page, size, keyword = '
     return () => {
       mounted = false;
     };
-  }, [category, period, page, size, keyword]);
+  }, [eventRegion, category, period, page, size, keyword]);
 
   return { events, totalPages, loading, error };
 }
