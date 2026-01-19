@@ -141,8 +141,7 @@ export default function KioskEventListPage() {
           </div>
         )}
 
-        {!loading && errorMsg && <div className={styles.spinnerWrapper}>{errorMsg}</div>}
-
+        {!loading && errorMsg && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{errorMsg}</div>}
         {!loading && !errorMsg && events.length === 0 && (
           <div className={styles.emptyWrapper}>
             해당 카테고리에 등록된 행사가 없습니다.
