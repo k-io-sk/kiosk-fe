@@ -126,7 +126,6 @@ export default function KioskEventListPage() {
 
   return (
     <div className={styles.page}>
-      {' '}
       <main className={styles.content}>
         <FilterBar
           selectedCategoryLabel={categoryLabel}
@@ -134,38 +133,43 @@ export default function KioskEventListPage() {
           className={styles.kioskFilter}
           categories={['전체', '공연', '전시', '기타']}
         />
-        {loading && (
-          <div className={styles.spinnerWrapper}>
-            <LoadingSpinner size={180} />
-          </div>
-        )}
 
-        {!loading && errorMsg && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{errorMsg}</div>}
-        {!loading && !errorMsg && events.length === 0 && (
-          <div className={styles.emptyWrapper}>
-            해당 카테고리에 등록된 행사가 없습니다.
-            <br />
-            다른 카테고리를 선택해 주세요.
-          </div>
-        )}
-        {!loading && !errorMsg && events.length > 0 && (
-          <>
-            <section className={styles.grid}>
-              {events.map((event) => (
-                <KioskEventCard key={event.eventId} event={event} />
-              ))}
-            </section>
-
-            <div className={styles.paginationWrap}>
-              <Pagination
-                totalPages={totalPages}
-                currentPage={page}
-                onPageChange={handlePageChange}
-                className={styles.kioskPagination}
-              />{' '}
+        <div className={styles.body}>
+          {loading && (
+            <div className={styles.spinnerWrapper}>
+              <LoadingSpinner size={180} />
             </div>
-          </>
-        )}
+          )}
+
+          {!loading && errorMsg && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{errorMsg}</div>}
+
+          {!loading && !errorMsg && events.length === 0 && (
+            <div className={styles.emptyWrapper}>
+              해당 카테고리에 등록된 행사가 없습니다.
+              <br />
+              다른 카테고리를 선택해 주세요.
+            </div>
+          )}
+
+          {!loading && !errorMsg && events.length > 0 && (
+            <>
+              <section className={styles.grid}>
+                {events.map((event) => (
+                  <KioskEventCard key={event.eventId} event={event} />
+                ))}
+              </section>
+
+              <div className={styles.paginationWrap}>
+                <Pagination
+                  totalPages={totalPages}
+                  currentPage={page}
+                  onPageChange={handlePageChange}
+                  className={styles.kioskPagination}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </main>
     </div>
   );
