@@ -134,10 +134,9 @@ export default function KioskEventListPage() {
           className={styles.kioskFilter}
           categories={['전체', '공연', '전시', '기타']}
         />
-
         {loading && (
           <div className={styles.spinnerWrapper}>
-            <LoadingSpinner size={72} />
+            <LoadingSpinner size={180} />
           </div>
         )}
 
@@ -149,7 +148,6 @@ export default function KioskEventListPage() {
             다른 카테고리를 선택해 주세요.
           </div>
         )}
-
         {!loading && !errorMsg && events.length > 0 && (
           <>
             <section className={styles.grid}>
