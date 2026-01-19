@@ -1,8 +1,8 @@
 .kiosk {
-  width: 1820px;
-  height: 1745px;
-  margin: 0 auto;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
 }
 
 .content {
@@ -10,23 +10,34 @@
 }
 
 .backBtn {
-  display: inline-flex;
-  align-items: center;
+  margin: 4rem 9rem 0 auto;
+
+  display: flex;
+  width: 292px;
+  padding: 40px;
+
   justify-content: center;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 15px;
 
-  margin: 4rem 0 1rem 10rem;
-  padding: 1.2rem 2.4rem;
-  height: 6rem;
+  border-radius: 70px;
+  background: #fe6c50;
+  border: none;
 
-  font-size: 2.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.backBtn span {
+  color: #fff;
+  text-align: center;
+  font-size: 42px;
   font-weight: 700;
+}
 
-  background-color: #fff;
-  color: #FE6C50;
-
-  border: solid 6px #FE6C50;
-  border-radius: 50px;
+.backIcon {
+  width: 48px;
+  height: 48px;
+  color: #fff;
 }
 
 .fullCenter {

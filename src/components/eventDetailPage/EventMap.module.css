@@ -73,17 +73,38 @@
 
 /* KIOSK (1820 x 2250) */
 .kioskWrap {
-  max-width: 98rem;
   padding: 2rem 2rem;
-  border-radius: 50px;
+  max-width: none;
+  width: 80%;
+  min-height: none;
 }
 
 .kioskTitle {
-  font-size: 2.8rem;
+  font-size: 55px;
+  font-weight: 700;
   padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.3rem;
 }
 
 .kioskNote {
   font-size: 2rem;
   margin: 0.5rem 0 1.5rem;
+}
+
+.kioskIconWrap {
+  width: 55px;
+  height: 55px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-5px);
+}
+
+.kioskIcon {
+  width: 55px;
+  height: 55px;
+  color: #fe6c50;
+  stroke-width: 2.5;
 }

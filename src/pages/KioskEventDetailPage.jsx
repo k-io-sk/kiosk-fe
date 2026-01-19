@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { IoChevronBack } from 'react-icons/io5';
+import { FiArrowLeft } from 'react-icons/fi';
 import EventBasicInfo from '@/components/eventDetailPage/EventBasicInfo';
 import EventMap from '@/components/eventDetailPage/EventMap';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
@@ -68,7 +68,7 @@ export default function KioskEventDetailPage() {
     <div className={styles.page}>
       <main className={styles.content}>
         <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          <IoChevronBack size={55} />
+          <FiArrowLeft className={styles.backIcon} />
           <span>목록으로</span>
         </button>
 
