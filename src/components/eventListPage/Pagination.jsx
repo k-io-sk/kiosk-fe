@@ -4,27 +4,25 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
   if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
+    let start = currentPage - 1;
+    let end = currentPage + 1;
+
+    if (start < 1) {
+      start = 1;
+      end = Math.min(3, totalPages);
+    }
+
+    if (end > totalPages) {
+      end = totalPages;
+      start = Math.max(1, totalPages - 2);
+    }
+
     const pages = [];
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, currentPage + 2);
-
-    if (startPage > 1) pages.push(1);
-    if (startPage > 2) pages.push('…');
-
-    for (let i = startPage; i <= endPage; i++) {
+    for (let i = start; i <= end; i++) {
       pages.push(i);
     }
 
-    if (endPage < totalPages - 1) pages.push('…');
-    if (endPage < totalPages) pages.push(totalPages);
-
     return pages;
-  };
-
-  const handleClick = (page) => {
-    if (page !== '…' && page !== currentPage) {
-      onPageChange(page);
-    }
   };
 
   return (
@@ -33,12 +31,11 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
         {'<'}
       </button>
 
-      {getPageNumbers().map((page, idx) => (
+      {getPageNumbers().map((page) => (
         <button
-          key={idx}
+          key={page}
           className={`${styles.pageNumber} ${page === currentPage ? styles.active : ''}`}
-          onClick={() => handleClick(page)}
-          disabled={page === '…'}
+          onClick={() => onPageChange(page)}
         >
           {page}
         </button>
