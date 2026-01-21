@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import MbtiResultCard from '../components/mbtiResultPage/MbtiResultCard';
 import styles from './MbtiResultPage.module.css';
@@ -12,6 +12,17 @@ const MbtiResultPage = () => {
 
   const regionKey = useMemo(() => searchParams.get('region') || DEFAULT_REGION_KEY, [searchParams]);
   const regionLabel = useMemo(() => getRegionConfig(regionKey).label, [regionKey]);
+
+  useEffect(() => {
+    const currentRegion = searchParams.get('region');
+
+    if (!currentRegion) {
+      const params = new URLSearchParams(searchParams);
+      params.set('region', regionKey);
+
+      navigate(`?${params.toString()}`, { replace: true });
+    }
+  }, [searchParams, regionKey, navigate]);
 
   const eventIds = useMemo(() => {
     return searchParams
