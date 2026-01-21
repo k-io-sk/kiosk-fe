@@ -6,6 +6,7 @@ import Pagination from '@/components/eventListPage/Pagination';
 import FilterBar from '@/components/eventListPage/FilterBar';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import { getEventList } from '@/api/eventList';
+import { DEFAULT_REGION_KEY, getRegionConfig } from '@/config/kioskConfig';
 
 export default function KioskEventListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,7 +19,7 @@ export default function KioskEventListPage() {
     if (!region || !category || !page) {
       setSearchParams(
         {
-          region: region ?? 'jongno',
+          region: region ?? DEFAULT_REGION_KEY,
           category: category ?? 'ALL',
           page: page ?? '1',
         },
@@ -28,7 +29,10 @@ export default function KioskEventListPage() {
   }, [searchParams, setSearchParams]);
 
   const regionParam = (searchParams.get('region') || 'jongno').toLowerCase();
-  const eventRegion = useMemo(() => (regionParam === 'insa' ? 'INSA' : 'JONGNO'), [regionParam]);
+  const eventRegion = useMemo(() => {
+    const region = getRegionConfig(regionParam);
+    return region.apiRegion;
+  }, [regionParam]);
 
   const categoryFromURL = (searchParams.get('category') || 'ALL').toUpperCase();
   const pageFromURL = Number(searchParams.get('page') || 1);

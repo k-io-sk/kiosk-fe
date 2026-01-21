@@ -1,20 +1,31 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import styles from './KioskLayout.module.css';
 import KioskHeader from '@/components/global/header/KioskHeader';
 import KioskFooter from '@/components/global/footer/KioskFooter';
 import { useKioskUI } from '@/contexts/KioskUIContext';
+import { DEFAULT_REGION_KEY, getRegionConfig } from '@/config/kioskConfig';
 
 export default function KioskLayout() {
   const { hideFooter } = useKioskUI();
+  const [searchParams] = useSearchParams();
+
+  const regionKey = (searchParams.get('region') || DEFAULT_REGION_KEY).toLowerCase();
+  const region = getRegionConfig(regionKey);
 
   return (
-    <div className={styles.shell}>
+    <div
+      className={styles.shell}
+      style={{
+        '--kiosk-bg': `url(${region.backgroundImage})`,
+        '--primary': region.primary,
+      }}
+    >
       <header className={styles.header}>
         <KioskHeader />
       </header>
 
       <main className={styles.main}>
-        <Outlet />
+        <Outlet context={{ regionKey, region }} />
       </main>
 
       {!hideFooter && (
