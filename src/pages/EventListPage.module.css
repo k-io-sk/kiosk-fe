@@ -10,7 +10,6 @@
 .container {
   padding: 40px 80px;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
 }
 
 .grid {
@@ -32,10 +31,10 @@
 
 .card img {
   width: 100%;
-  height: 260px; /* 260px로 수정 */
+  height: 260px;
   object-fit: cover;
   display: block;
-  background-color: #ccc; /* 이미지 없을 때 회색 */
+  background-color: #ccc;
 }
 
 .title {
@@ -95,4 +94,32 @@
   .container {
     padding: 28px 20px;
   }
+}
+
+.fullScreenMessage {
+  width: 100%;
+  min-height: calc(100dvh - var(--top-offset));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.retryBtn {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background: #06394a;
+  color: #fff;
+  font-weight: 700;
 }
