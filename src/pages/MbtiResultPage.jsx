@@ -1,14 +1,17 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import MbtiResultCard from '../components/mbtiResultPage/MbtiResultCard';
 import styles from './MbtiResultPage.module.css';
 import { useEventRecommendSummary } from '@hooks/useEventRecommendSummary';
-
 import { shareMbtiResult } from '@/utils/kakao/shareMbtiResult';
+import { getRegionConfig, DEFAULT_REGION_KEY } from '@config/kioskConfig';
 
 const MbtiResultPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  const regionKey = useMemo(() => searchParams.get('region') || DEFAULT_REGION_KEY, [searchParams]);
+  const regionLabel = useMemo(() => getRegionConfig(regionKey).label, [regionKey]);
 
   const eventIds = useMemo(() => {
     return searchParams
@@ -34,26 +37,35 @@ const MbtiResultPage = () => {
     }));
   }, [summary]);
 
-  const handleKakaoShare = async () => {
+  const buildShareUrl = useCallback(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set('region', regionKey);
+
+    return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+  }, [searchParams, regionKey]);
+
+  const handleKakaoShare = useCallback(async () => {
     try {
-      const shareUrl = window.location.origin + window.location.pathname + '?' + searchParams.toString();
+      const shareUrl = buildShareUrl();
+      const imageUrl = cards?.[0]?.imageUrl ?? `${window.location.origin}/og-image.png`;
 
-      const imageUrl = cards?.[0]?.imageUrl ?? 'https://skukiosk.netlify.app/og-image.png';
-
-      await shareMbtiResult({ shareUrl, imageUrl });
+      await shareMbtiResult({ shareUrl, imageUrl, regionKey });
     } catch (e) {
       console.error(e);
       alert('카카오 공유 실패');
     }
-  };
+  }, [buildShareUrl, cards, regionKey]);
 
-  const handleClickDetail = (eventId) => {
-    navigate(`/events/${eventId}`);
-  };
+  const handleClickDetail = useCallback(
+    (eventId) => {
+      navigate(`/events/${eventId}?region=${regionKey}`);
+    },
+    [navigate],
+  );
 
-  const handleClickMoreEvents = () => {
-    navigate('/events');
-  };
+  const handleClickMoreEvents = useCallback(() => {
+    navigate(`/events?region=${regionKey}`);
+  }, [navigate, regionKey]);
 
   if (!eventIds.length) {
     return (
@@ -68,6 +80,12 @@ const MbtiResultPage = () => {
         <div className={`${styles.container} ${styles.centerWrap}`}>
           <div className={styles.centerText}>추천 결과 정보가 없어요</div>
         </div>
+
+        <section className={styles.actions}>
+          <button type='button' className={styles.eventListButton} onClick={handleClickMoreEvents}>
+            {regionLabel} 이벤트 더 알아보기
+          </button>
+        </section>
       </div>
     );
   }
@@ -110,7 +128,7 @@ const MbtiResultPage = () => {
 
         <section className={styles.actions}>
           <button type='button' className={styles.eventListButton} onClick={handleClickMoreEvents}>
-            인사동 이벤트 더 알아보기
+            {regionLabel} 이벤트 더 알아보기
           </button>
 
           <button type='button' className={styles.shareButton} onClick={handleKakaoShare}>
