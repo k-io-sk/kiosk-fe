@@ -31,14 +31,14 @@ export default function KioskHeader({ active }) {
   const goEvents = (nextRegionKey) => {
     const next = new URLSearchParams(searchParams);
     next.set('region', nextRegionKey);
-    setSearchParams(next, { replace: true });
+    setSearchParams(next, { replace: false });
     navigate(`/kiosk/events?${next.toString()}`);
   };
 
   const goMbti = () => {
-    const next = new URLSearchParams(searchParams);
+    const next = new URLSearchParams();
     next.set('region', regionKey);
-    setSearchParams(next, { replace: true });
+    setSearchParams(next, { replace: false });
     navigate(`/kiosk/mbti?${next.toString()}`);
   };
 
@@ -47,11 +47,18 @@ export default function KioskHeader({ active }) {
 
     const timer = setTimeout(() => {
       setBlockedPage(null);
-      goEvents(DEFAULT_REGION_KEY);
+
+      const next = new URLSearchParams();
+      next.set('region', DEFAULT_REGION_KEY);
+      next.set('category', 'ALL');
+      next.set('page', '1');
+
+      setSearchParams(next, { replace: true });
+      navigate(`/kiosk/events?${next.toString()}`);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [modalOpen]);
+  }, [modalOpen, navigate, setSearchParams]);
 
   return (
     <header className={styles.topHeader}>
