@@ -19,6 +19,9 @@ export default function KioskLayout() {
         '--kiosk-bg': `url(${region.backgroundImage})`,
         '--primary': region.primary,
         '--qr-notice-text': region.qrNotice,
+        '--mbti-selected-bg': region.mbtiSelectedBg,
+        '--result-border': region.resultBorder,
+        '--result-bg': region.resultBg,
       }}
     >
       <header className={styles.header}>
