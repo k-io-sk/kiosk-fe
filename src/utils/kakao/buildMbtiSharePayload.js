@@ -1,4 +1,4 @@
-import { getRegionConfig } from '@/config/regionConfig';
+import { getRegionConfig } from '@/config/kioskConfig';
 
 export const buildMbtiSharePayload = ({ shareUrl, imageUrl, regionKey }) => {
   const origin = window.location.origin;

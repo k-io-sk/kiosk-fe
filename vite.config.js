@@ -16,6 +16,7 @@ export default defineConfig({
       { find: '@hooks', replacement: '/src/hooks' },
       { find: '@global', replacement: '/src/components/global' },
       { find: '@utils', replacement: '/src/utils' },
+      { find: '@config', replacement: '/src/config' },
     ],
   },
 });
