@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRecommendEvents } from '@api/eventRecommendAPI';
-import { getRandomEventsByCategory } from '@api/eventRecommendAPI';
+import { getRecommendEvents, getRandomEventsByCategory } from '@api/eventRecommendAPI';
 
 const pickFields = (e) => ({
   eventId: e.eventId,
@@ -11,7 +10,7 @@ const pickFields = (e) => ({
   mainImage: e.mainImage,
 });
 
-export function useEventRecommend({ mbti, requestKey, mode = 'random' } = {}) {
+export function useEventRecommend({ mbti, region, requestKey, mode = 'random' } = {}) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,18 +23,23 @@ export function useEventRecommend({ mbti, requestKey, mode = 'random' } = {}) {
         setLoading(true);
         setError(null);
 
-        let res;
+        if (mode === 'mbti') {
+          if (!mbti) {
+            setEvents([]);
+            return;
+          }
 
-        if (mode === 'mbti' && mbti) {
-          res = await getRecommendEvents(mbti);
-          setEvents(Array.isArray(res) ? res : []);
+          const list = await getRecommendEvents({ mbti, region });
+          setEvents(Array.isArray(list) ? list : []);
           return;
         }
 
         if (mode === 'random') {
           const result = await getRandomEventsByCategory();
-          const list = Array.isArray(result?.data) ? result.data.map(pickFields) : [];
-          setEvents(list);
+
+          const raw = Array.isArray(result) ? result : Array.isArray(result?.data) ? result.data : [];
+
+          setEvents(raw.map(pickFields));
         }
       } catch (e) {
         setError(e);
@@ -46,7 +50,7 @@ export function useEventRecommend({ mbti, requestKey, mode = 'random' } = {}) {
     };
 
     fetch();
-  }, [mbti, requestKey, mode]);
+  }, [mbti, region, requestKey, mode]);
 
   return { events, loading, error };
 }

@@ -13,13 +13,13 @@
 }
 
 .selected {
-  background: #ffddcf;
-  border-color: #ffddcf;
+  background: var(--mbti-selected-bg, #ffddcf);
+  border-color: var(--mbti-selected-bg, #ffddcf);
 }
 
 .selected .type,
 .selected .label {
-  color: #fe6c50;
+  color: var(--primary);
 }
 
 .type {

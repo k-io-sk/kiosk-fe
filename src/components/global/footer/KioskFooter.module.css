@@ -14,7 +14,7 @@
 .text {
   margin: 0;
   text-align: right;
-  color: #fe6c50;
+  color: var(--qr-notice-text, #fe6c50);
   font-weight: 700;
   font-size: 40px;
   line-height: 1.3;

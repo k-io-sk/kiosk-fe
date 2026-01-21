@@ -1,12 +1,24 @@
 import styles from './MbtiInfoText.module.css';
+import { useOutletContext } from 'react-router-dom';
 
 const MbtiInfoText = () => {
+  const { region } = useOutletContext();
+  const isHwaseong = region.key === 'hwaseong';
   return (
     <div className={styles.textWrap}>
       <p>
         MBTI 성향과 취향을 반영해
         <br />
-        <span className={styles.point}>종로구 이벤트</span>를 맞춤 추천해드립니다!
+        <span
+          className={styles.point}
+          style={{
+            fontSize: isHwaseong ? '68px' : undefined,
+            color: isHwaseong ? 'var(--primary)' : undefined,
+          }}
+        >
+          {region.label} 이벤트
+        </span>
+        를 맞춤 추천해드립니다!
       </p>
       <br />
       <p>

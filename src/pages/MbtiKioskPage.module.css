@@ -64,8 +64,8 @@
 }
 
 .active {
-  border-color: #fe6c50;
-  color: #fe6c50;
+  border-color: var(--primary, #fe6c50);
+  color: var(--primary, #fe6c50);
 }
 
 .loading {
