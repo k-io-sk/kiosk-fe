@@ -49,7 +49,7 @@ export default function KioskHeader({ active }) {
       setBlockedPage(null);
 
       const next = new URLSearchParams();
-      next.set('region', DEFAULT_REGION_KEY);
+      next.set('region', regionKey);
       next.set('category', 'ALL');
       next.set('page', '1');
 
@@ -94,7 +94,7 @@ export default function KioskHeader({ active }) {
         onClose={() => setBlockedPage(null)}
         onConfirm={() => {
           setBlockedPage(null);
-          goEvents(DEFAULT_REGION_KEY);
+          goEvents(regionKey);
         }}
         width='40rem'
         height='20rem'
