@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import MbtiCard from '../components/mbtiKiosk/MbtiCard';
 import MbtiInfoText from '../components/mbtiKiosk/MbtiInfoText';
 import MbtiResult from '../components/mbtiKiosk/MbtiResult';
@@ -6,8 +7,6 @@ import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import { useKioskUI } from '@/contexts/KioskUIContext';
-
-const LIST_URL = 'https://skukiosk.netlify.app/events';
 
 const MBTI_LIST_DESKTOP = [
   { type: 'E', label: '외향적' },
@@ -48,6 +47,9 @@ const MbtiKioskPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [requestKey, setRequestKey] = useState(null);
   const [requestedMbti, setRequestedMbti] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const region = (searchParams.get('region') || 'JONGNO').toUpperCase();
 
   const mbti = useMemo(() => {
     const pick = (a, b) => (selectedTypes.includes(a) ? a : selectedTypes.includes(b) ? b : '');
@@ -65,6 +67,7 @@ const MbtiKioskPage = () => {
     error,
   } = useEventRecommend({
     mbti: requestedMbti,
+    region,
     requestKey,
     mode: 'mbti',
   });
@@ -95,7 +98,6 @@ const MbtiKioskPage = () => {
     }
 
     setShowResult(true);
-
     setRequestedMbti(mbti);
     setRequestKey((k) => (k === null ? 1 : k + 1));
   };
@@ -109,11 +111,10 @@ const MbtiKioskPage = () => {
     description: '',
     eventId: item.eventId,
     imageUrl: item.mainImage,
-    qrUrl: item.eventId ? `${base}/mbti/result?eventIds=${item.eventId}` : null, 
+    qrUrl: item.eventId ? `${base}/mbti/result?eventIds=${item.eventId}` : null,
   }));
 
   const topQrUrl = useMemo(() => {
-    const base = window.location.origin;
     const eventIds = resultList
       .map((e) => e.eventId)
       .filter(Boolean)
@@ -123,7 +124,7 @@ const MbtiKioskPage = () => {
 
     const query = eventIds.map((id) => `eventIds=${id}`).join('&');
     return `${base}/mbti/result?${query}`;
-  }, [resultList]);
+  }, [resultList, base]);
 
   const isReady = Boolean(mbti);
   const isLoading = loading;
@@ -137,7 +138,6 @@ const MbtiKioskPage = () => {
 
   useEffect(() => {
     setHideFooter(showResult);
-
     return () => setHideFooter(false);
   }, [showResult, setHideFooter]);
 
