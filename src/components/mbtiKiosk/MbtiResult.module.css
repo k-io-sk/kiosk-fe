@@ -4,8 +4,8 @@
   width: 1755px;
   height: 970px;
   border-radius: 23px;
-  border: 3px solid #f8ecde;
-  background: #fffdfa;
+  border: 3px solid var(--result-border, #f8ecde);
+  background: var(--result-bg, #fffdfa);
   padding: 60px;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
 
 .noticeText {
   margin: 0;
-  color: #fe6c50;
+  color: var(--qr-notice-text, #fe6c50);
   font-weight: 700;
   font-size: 45px;
   line-height: 1.2;
