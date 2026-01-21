@@ -7,6 +7,7 @@ import styles from './MbtiKioskPage.module.css';
 import { useEventRecommend } from '../hooks/useEventRecommend';
 import LoadingSpinner from '@global/pageLoader/LoadingSpinner';
 import { useKioskUI } from '@/contexts/KioskUIContext';
+import { DEFAULT_REGION_KEY, getRegionConfig } from '@/config/kioskConfig';
 
 const MBTI_LIST_DESKTOP = [
   { type: 'E', label: '외향적' },
@@ -49,7 +50,8 @@ const MbtiKioskPage = () => {
   const [requestedMbti, setRequestedMbti] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const region = (searchParams.get('region') || 'JONGNO').toUpperCase();
+  const regionKey = (searchParams.get('region') || DEFAULT_REGION_KEY).toLowerCase();
+  const region = getRegionConfig(regionKey);
 
   const mbti = useMemo(() => {
     const pick = (a, b) => (selectedTypes.includes(a) ? a : selectedTypes.includes(b) ? b : '');
@@ -67,7 +69,7 @@ const MbtiKioskPage = () => {
     error,
   } = useEventRecommend({
     mbti: requestedMbti,
-    region,
+    region: region.apiRegion,
     requestKey,
     mode: 'mbti',
   });
