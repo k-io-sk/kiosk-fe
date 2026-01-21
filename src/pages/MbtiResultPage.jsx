@@ -52,7 +52,7 @@ const MbtiResultPage = () => {
     const params = new URLSearchParams(searchParams);
     params.set('region', regionKey);
 
-    return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+    return `${window.location.origin}/mobile/mbti/result?${params.toString()}`;
   }, [searchParams, regionKey]);
 
   const handleKakaoShare = useCallback(async () => {

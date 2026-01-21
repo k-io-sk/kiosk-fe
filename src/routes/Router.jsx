@@ -41,6 +41,10 @@ export default function AppRouter() {
             <Route path='*' element={<NotFoundPage />} />
           </Route>
 
+          <Route path='/mobile' element={<MainLayout />}>
+            <Route path='mbti/result' element={<MbtiResultPage />} />
+          </Route>
+
           <Route
             path='/kiosk'
             element={
