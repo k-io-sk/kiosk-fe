@@ -105,6 +105,6 @@
 .kioskIcon {
   width: 55px;
   height: 55px;
-  color: #fe6c50;
+  color: var(--primary, #fe6c50);
   stroke-width: 2.5;
 }

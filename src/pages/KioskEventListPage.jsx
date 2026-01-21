@@ -159,7 +159,7 @@ export default function KioskEventListPage() {
             <>
               <section className={styles.grid}>
                 {events.map((event) => (
-                  <KioskEventCard key={event.eventId} event={event} />
+                  <KioskEventCard key={event.eventId} event={event} regionKey={regionParam} />
                 ))}
               </section>
 

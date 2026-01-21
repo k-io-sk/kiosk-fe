@@ -21,7 +21,7 @@
   gap: 15px;
 
   border-radius: 70px;
-  background: #fe6c50;
+  background: var(--primary, #fe6c50);
   border: none;
 
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
