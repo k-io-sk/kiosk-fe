@@ -29,7 +29,7 @@ export default function EventListPage() {
     setCurrentPage(pageFromURL);
   }, [categoryFromURL, keywordFromURL, pageFromURL]);
 
-  const pageSize = 8;
+  const pageSize = isMobileDevice() ? 6 : 8;
 
   const categoryMap = {
     전체: 'ALL',
@@ -45,7 +45,7 @@ export default function EventListPage() {
     ETC: '기타',
   };
 
-  const { events, totalPages, loading } = useEventList({
+  const { events, totalPages, loading, error, refetch } = useEventList({
     eventRegion: 'JONGNO',
     category: selectedCategory,
     page: currentPage,
@@ -93,6 +93,17 @@ export default function EventListPage() {
   };
 
   if (loading) return <PageLoader />;
+
+  if (error) {
+    return (
+      <div className={styles.fullScreenMessage}>
+        <p className={styles.title}>이벤트 목록을 불러오지 못했습니다.</p>
+        <button className={styles.retryBtn} onClick={() => window.location.reload()}>
+          다시 시도
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.page}>

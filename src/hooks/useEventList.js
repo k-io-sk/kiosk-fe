@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getEventList } from '@api/eventList';
 
 export function useEventList({ eventRegion = 'JONGNO', category, period = 'ALL', page, size, keyword = '' }) {
@@ -6,6 +6,8 @@ export function useEventList({ eventRegion = 'JONGNO', category, period = 'ALL',
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [retryKey, setRetryKey] = useState(0);
+  const refetch = useCallback(() => setRetryKey((k) => k + 1), []);
 
   useEffect(() => {
     let mounted = true;
@@ -43,7 +45,7 @@ export function useEventList({ eventRegion = 'JONGNO', category, period = 'ALL',
     return () => {
       mounted = false;
     };
-  }, [eventRegion, category, period, page, size, keyword]);
+  }, [eventRegion, category, period, page, size, keyword, retryKey]);
 
-  return { events, totalPages, loading, error };
+  return { events, totalPages, loading, error, refetch };
 }
