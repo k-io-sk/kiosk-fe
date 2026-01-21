@@ -55,7 +55,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 15px solid #fe6c50;
+  border: 15px solid var(--primary);
 }
 
 /* 모서리 위치 */
@@ -87,12 +87,10 @@
   border-top: none;
 }
 
-/* 안내 문구 */
 .text {
   margin: 0;
-  color: #fe6c50;
+  color: var(--primary);
   text-align: center;
-  font-family: 'Noto Sans', sans-serif;
   font-size: 55px;
   font-weight: 700;
 }

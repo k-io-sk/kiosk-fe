@@ -18,13 +18,11 @@ export default function EventBasicInfo({ data, kiosk = false }) {
     isFree,
   } = data || {};
 
-  const safe = (v) => (v && String(v).trim() !== '' ? v : '-');
-  const hasTime = safe(eventTime) !== '-';
+  const hasValue = (v) => v !== null && v !== undefined && String(v).trim() !== '';
 
   const openLink = (url) => {
-    const u = safe(url);
-    if (u === '-') return;
-    window.open(u, '_blank', 'noopener,noreferrer');
+    if (!hasValue(url)) return;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -33,8 +31,8 @@ export default function EventBasicInfo({ data, kiosk = false }) {
         {/* 포스터 */}
         <div className={`${styles.posterCard} ${kiosk ? styles.kioskPosterCard : ''}`}>
           <img
-            src={safe(mainImage) !== '-' ? mainImage : artweekPoster}
-            alt={`${safe(title)} 포스터`}
+            src={hasValue(mainImage) ? mainImage : artweekPoster}
+            alt={`${hasValue(title) ? title : '이벤트'} 포스터`}
             loading='lazy'
             decoding='async'
           />
@@ -43,56 +41,63 @@ export default function EventBasicInfo({ data, kiosk = false }) {
         {/* 기본 정보 */}
         <div className={`${styles.info} ${kiosk ? styles.kioskInfo : ''}`}>
           <h2 id='event-basic-title' className={`${styles.title} ${kiosk ? styles.kioskTitle : ''}`}>
-            {safe(title)}
+            {hasValue(title) ? title : '제목 없음'}
           </h2>
 
           <dl className={`${styles.meta} ${kiosk ? styles.kioskMeta : ''}`}>
-            <div>
-              <dt>장소</dt>
-              <dd>{safe(location)}</dd>
-            </div>
+            {hasValue(location) && (
+              <div>
+                <dt>장소</dt>
+                <dd>{location}</dd>
+              </div>
+            )}
 
-            <div>
-              <dt>기간</dt>
-              <dd className={styles.period}>
-                <span className={styles.date}>
-                  {safe(startDate)} ~ {safe(endDate)}
-                </span>
-                {hasTime && (
-                  <span className={`${styles.time} ${kiosk ? styles.kioskTime : ''}`}>{safe(eventTime)}</span>
-                )}
-              </dd>
-            </div>
+            {(hasValue(startDate) || hasValue(endDate)) && (
+              <div>
+                <dt>기간</dt>
+                <dd className={styles.period}>
+                  <span className={styles.date}>
+                    {hasValue(startDate) ? startDate : ''} ~ {hasValue(endDate) ? endDate : ''}
+                  </span>
+                  {hasValue(eventTime) && (
+                    <span className={`${styles.time} ${kiosk ? styles.kioskTime : ''}`}>{eventTime}</span>
+                  )}
+                </dd>
+              </div>
+            )}
 
-            <div>
-              <dt>모집대상</dt>
-              <dd>{safe(recruitTarget)}</dd>
-            </div>
+            {hasValue(recruitTarget) && (
+              <div>
+                <dt>모집대상</dt>
+                <dd>{recruitTarget}</dd>
+              </div>
+            )}
 
-            <div>
-              <dt>기본가</dt>
-              <dd>{isFree ? '무료' : safe(price)}</dd>
-            </div>
+            {(hasValue(price) || isFree) && (
+              <div>
+                <dt>기본가</dt>
+                <dd>{isFree ? '무료' : price}</dd>
+              </div>
+            )}
 
-            <div>
-              <dt>문의</dt>
-              <dd>{safe(inquiry)}</dd>
-            </div>
+            {hasValue(inquiry) && (
+              <div>
+                <dt>문의</dt>
+                <dd>{inquiry}</dd>
+              </div>
+            )}
 
-            <div>
-              <dt>비고</dt>
-              <dd>{safe(description)}</dd>
-            </div>
+            {hasValue(description) && (
+              <div>
+                <dt>비고</dt>
+                <dd>{description}</dd>
+              </div>
+            )}
           </dl>
 
-          {!kiosk && (
+          {!kiosk && hasValue(orgLink) && (
             <div className={styles.actions}>
-              <button
-                type='button'
-                className={styles.btn}
-                onClick={() => openLink(orgLink)}
-                disabled={safe(orgLink) === '-'}
-              >
+              <button type='button' className={styles.btn} onClick={() => openLink(orgLink)}>
                 홈페이지
               </button>
             </div>

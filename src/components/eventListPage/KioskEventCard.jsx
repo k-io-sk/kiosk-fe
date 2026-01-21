@@ -1,13 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './KioskEventCard.module.css';
 
 export default function KioskEventCard({ event }) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { eventId, mainImage, title, location } = event;
 
   const handleClick = () => {
     if (!eventId) return;
-    navigate(`/kiosk/events/${eventId}`);
+    const region = searchParams.get('region') || 'jongno';
+    navigate(`/kiosk/events/${eventId}?region=${region}`);
   };
 
   return (

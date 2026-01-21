@@ -15,12 +15,6 @@
   color: #111;
 }
 
-.activeTab {
-  width: 240px;
-  text-align: center;
-  border-bottom: 12px solid #005278;
-}
-
 .content {
   padding: 0 120px;
   box-sizing: border-box;
@@ -81,7 +75,7 @@
 }
 
 .paginationWrap :global(button[class*='active']) {
-  background-color: #fe6c50;
+  background-color: var(--primary);
 }
 
 .kioskFilter {
@@ -115,7 +109,7 @@
 
 .kioskFilter :global(li[class*='active']) {
   width: 135px;
-  background: #fe6c50;
+  background: var(--primary);
   color: #fff;
   border-bottom: none;
 }

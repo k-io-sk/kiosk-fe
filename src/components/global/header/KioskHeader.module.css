@@ -40,8 +40,7 @@
 }
 
 .activeTab {
-  background: #fe6c50;
-  border: 3px solid #fe6c50;
-
+  background: var(--primary);
+  border: 3px solid var(--primary);
   color: #fff;
 }
