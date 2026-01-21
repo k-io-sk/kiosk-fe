@@ -18,6 +18,7 @@ export default function KioskLayout() {
       style={{
         '--kiosk-bg': `url(${region.backgroundImage})`,
         '--primary': region.primary,
+        '--qr-notice-text': region.qrNotice,
       }}
     >
       <header className={styles.header}>

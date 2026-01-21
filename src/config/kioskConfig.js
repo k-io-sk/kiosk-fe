@@ -26,6 +26,7 @@ export const REGION_CONFIG = {
     apiRegion: 'HWASEONG',
     backgroundImage: bgHwaseong,
     primary: '#2559AD',
+    qrNotice: '#FF0000',
     headerMode: 'hwaseong',
   },
 };

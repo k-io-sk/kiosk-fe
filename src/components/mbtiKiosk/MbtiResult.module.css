@@ -46,7 +46,7 @@
 .notice {
   width: 100%;
   font-size: 25px;
-  color: #e85100;
+  color: var(--qr-notice-text, #fe6c50);
   margin-bottom: 24px;
 }
 
