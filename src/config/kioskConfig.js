@@ -1,5 +1,6 @@
 import bgJongno from '@assets/images/bgJongno.png';
 import bgHwaseong from '@assets/images/bgHwaseong.png';
+import bgOsansi from '@assets/images/bgOsansi.png';
 
 export const DEFAULT_REGION_KEY = 'jongno';
 
@@ -10,6 +11,7 @@ const JONGNO_BASE = {
   resultBorder: '#f8ecde',
   resultBg: '#fffdfa',
   qrNotice: '#FE6C50',
+  mbtiCard: { bg: undefined, text: undefined },
 };
 
 export const REGION_CONFIG = {
@@ -40,6 +42,24 @@ export const REGION_CONFIG = {
     resultBorder: '#ACC9DE',
     resultBg: '#F3F7FC',
     qrNotice: '#FF0000',
+    mbtiCard: { bg: undefined, text: undefined },
+  },
+
+  osansi: {
+    key: 'osansi',
+    label: '오산',
+    apiRegion: 'OSAN',
+    backgroundImage: bgOsansi,
+    primary: '#1A4D7E',
+    headerMode: 'osansi',
+    mbtiSelectedBg: '#7AA7D3',
+    resultBorder: '#1A4D7E',
+    resultBg: '#ACC9DE',
+    qrNotice: '#FF0004',
+    mbtiCard: {
+      bg: '#7AA7D3',
+      text: '#FFFFFF',
+    },
   },
 };
 
@@ -52,4 +72,5 @@ export const HEADER_TABS = {
     { key: 'insa', label: '인사동' },
   ],
   hwaseong: [{ key: 'hwaseong', label: '화성' }],
+  osansi: [{ key: 'osansi', label: '오산' }],
 };

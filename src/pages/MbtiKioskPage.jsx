@@ -183,9 +183,7 @@ const MbtiKioskPage = () => {
                 </div>
               )}
 
-              {error && (
-                <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>추천 결과를 불러오지 못했어요</div>
-              )}
+              {error && <div className={`${styles.spinnerWrapper} ${styles.errorText}`}>{error.message}</div>}
 
               {!isLoading && !error && (
                 <MbtiResult
