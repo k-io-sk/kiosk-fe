@@ -12,8 +12,9 @@ const MbtiInfoText = () => {
         <span
           className={styles.point}
           style={{
-            fontSize: isHwaseong ? '68px' : undefined,
-            color: isHwaseong ? 'var(--primary)' : undefined,
+            color: region.primary,
+            fontSize: '68px',
+            fontWeight: 700,
           }}
         >
           {region.label} 이벤트
